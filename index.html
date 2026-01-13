@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="SPARTA: Provenance-Guided Quality-Assured Table-Text QA Benchmark Generation">
+  <meta name="description" content="SPARTA is an end-to-end framework that automatically generates large-scale Table-Text QA benchmarks with deep multi-hop reasoning, aggregations, and grouping operations.">
+  <meta name="keywords" content="Table-Text QA, Question Answering, Multi-hop Reasoning, Benchmark Generation, SQL, Natural Language Processing, Machine Learning">
+  <meta name="author" content="Anonymous Authors">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="SPARTA">
+  <meta property="og:title" content="SPARTA: Provenance-Guided Quality-Assured Table-Text QA Benchmark Generation">
+  <meta property="og:description" content="SPARTA is an end-to-end framework that automatically generates large-scale Table-Text QA benchmarks with deep multi-hop reasoning, aggregations, and grouping operations.">
+  <meta property="og:image" content="static/images/social_preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="SPARTA - Table-Text QA Benchmark Generation">
+  <meta property="article:published_time" content="2025-01-01T00:00:00.000Z">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="Table-Text QA">
+  <meta property="article:tag" content="Benchmark Generation">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SPARTA: Table-Text QA Benchmark Generation">
+  <meta name="twitter:description" content="An end-to-end framework for generating large-scale Table-Text QA benchmarks with deep multi-hop reasoning.">
+  <meta name="twitter:image" content="static/images/social_preview.png">
+  <meta name="twitter:image:alt" content="SPARTA - Table-Text QA Benchmark Generation">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="SPARTA: Provenance-Guided Quality-Assured Table-Text QA Benchmark Generation">
+  <meta name="citation_publication_date" content="2025">
+  <meta name="citation_conference_title" content="Under Review">
+
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#6366f1">
+  <meta name="msapplication-TileColor" content="#6366f1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+  <title>SPARTA | Table-Text QA Benchmark Generation</title>
+
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "SPARTA: Provenance-Guided Quality-Assured Table-Text QA Benchmark Generation",
+    "description": "An end-to-end framework that automatically generates large-scale Table-Text QA benchmarks with deep multi-hop reasoning, aggregations, and grouping operations.",
+    "datePublished": "2025-01-01",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Under Review"
+    },
+    "keywords": ["Table-Text QA", "Question Answering", "Multi-hop Reasoning", "Benchmark Generation", "SQL"],
+    "isAccessibleForFree": true
+  }
+  </script>
+
+  <style>
+    /* Custom styles for SPARTA */
+    :root {
+      --sparta-primary: #6366f1;
+      --sparta-secondary: #8b5cf6;
+      --sparta-accent: #ec4899;
+      --sparta-dark: #1e1b4b;
+    }
+
+    .sparta-gradient {
+      background: linear-gradient(135deg, var(--sparta-primary) 0%, var(--sparta-secondary) 50%, var(--sparta-accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-title-sparta {
+      font-size: 4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle-venue {
+      display: inline-block;
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      color: #92400e;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-top: 1rem;
+      border: 2px solid #f59e0b;
+    }
+
+    .coming-soon-btn {
+      background: linear-gradient(135deg, #e2e8f0, #cbd5e1) !important;
+      color: #64748b !important;
+      cursor: not-allowed;
+      position: relative;
+    }
+
+    .coming-soon-btn::after {
+      content: 'Coming Soon';
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #f59e0b;
+      color: white;
+      font-size: 0.6rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--sparta-primary), var(--sparta-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      color: #64748b;
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+
+    .comparison-table th {
+      background: linear-gradient(135deg, var(--sparta-primary), var(--sparta-secondary));
+      color: white;
+      padding: 1rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .comparison-table td {
+      padding: 0.875rem;
+      text-align: center;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .comparison-table tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    .comparison-table tr:hover {
+      background: #f1f5f9;
+    }
+
+    .comparison-table .sparta-row {
+      background: linear-gradient(135deg, #eef2ff, #e0e7ff) !important;
+      font-weight: 600;
+    }
+
+    .check-icon {
+      color: #10b981;
+      font-size: 1.2rem;
+    }
+
+    .cross-icon {
+      color: #ef4444;
+      font-size: 1.2rem;
+    }
+
+    .contribution-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      height: 100%;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+    }
+
+    .contribution-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+      border-color: var(--sparta-primary);
+    }
+
+    .contribution-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .icon-purple { background: linear-gradient(135deg, #8b5cf6, #a78bfa); }
+    .icon-blue { background: linear-gradient(135deg, #3b82f6, #60a5fa); }
+    .icon-pink { background: linear-gradient(135deg, #ec4899, #f472b6); }
+    .icon-green { background: linear-gradient(135deg, #10b981, #34d399); }
+
+    .pipeline-section {
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+      border-radius: 24px;
+      padding: 3rem;
+      margin: 2rem 0;
+    }
+
+    .pipeline-step {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .pipeline-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 24px;
+      top: 60px;
+      bottom: -20px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--sparta-primary), var(--sparta-secondary));
+    }
+
+    .step-number {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--sparta-primary), var(--sparta-secondary));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      margin-right: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgb(99 102 241 / 0.3);
+    }
+
+    .step-content h4 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--sparta-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .step-content p {
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    .figure-container {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+      margin: 1.5rem 0;
+    }
+
+    .figure-container img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .figure-caption {
+      text-align: center;
+      color: #64748b;
+      font-size: 0.95rem;
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    .results-highlight {
+      background: linear-gradient(135deg, #fef2f2, #fee2e2);
+      border-left: 4px solid #ef4444;
+      border-radius: 0 12px 12px 0;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .results-highlight strong {
+      color: #dc2626;
+    }
+
+    .domain-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .domain-tab {
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      border: 2px solid #e2e8f0;
+      background: white;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .domain-tab:hover, .domain-tab.active {
+      border-color: var(--sparta-primary);
+      background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+      color: var(--sparta-primary);
+    }
+
+    .interactive-demo {
+      background: linear-gradient(135deg, #1e1b4b, #312e81);
+      border-radius: 24px;
+      padding: 3rem;
+      color: white;
+    }
+
+    .demo-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .example-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .example-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #a5b4fc;
+      margin-bottom: 0.5rem;
+    }
+
+    .example-text {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .hop-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      color: #1e1b4b;
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-left: 0.5rem;
+    }
+
+    .sql-code {
+      background: #0f172a;
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: 'SF Mono', 'Monaco', monospace;
+      font-size: 0.85rem;
+      overflow-x: auto;
+      color: #e2e8f0;
+    }
+
+    .sql-keyword { color: #c084fc; }
+    .sql-function { color: #22d3ee; }
+    .sql-string { color: #86efac; }
+    .sql-number { color: #fbbf24; }
+
+    @media screen and (max-width: 768px) {
+      .hero-title-sparta {
+        font-size: 2.5rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .pipeline-section {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <main id="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="hero-title-sparta">
+              <span class="sparta-gradient">SPARTA</span>
+            </h1>
+            <h2 class="subtitle is-4" style="margin-top: 1rem; color: #64748b; font-weight: 500;">
+              Provenance-Guided Quality-Assured<br>Table-Text QA Benchmark Generation
+            </h2>
+
+            <div class="subtitle-venue">
+              <i class="fas fa-clock"></i>&nbsp; Under Review
+            </div>
+
+            <div class="column has-text-centered" style="margin-top: 2rem;">
+              <div class="publication-links">
+                <!-- Paper PDF - Coming Soon -->
+                <span class="link-block">
+                  <a class="external-link button is-normal is-rounded coming-soon-btn" disabled>
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <!-- arXiv - Coming Soon -->
+                <span class="link-block">
+                  <a class="external-link button is-normal is-rounded coming-soon-btn" disabled>
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
+                <!-- Code - Coming Soon -->
+                <span class="link-block">
+                  <a class="external-link button is-normal is-rounded coming-soon-btn" disabled>
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- Leaderboard - Coming Soon -->
+                <span class="link-block">
+                  <a class="external-link button is-normal is-rounded coming-soon-btn" disabled>
+                    <span class="icon">
+                      <i class="fas fa-trophy"></i>
+                    </span>
+                    <span>Leaderboard</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Stats Section -->
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">30+</div>
+            <div class="stat-label">F1 Point Drop for SOTA Models</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">0%</div>
+            <div class="stat-label">Annotation Error Rate</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">10K+</div>
+            <div class="stat-label">Table Rows Supported</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Diverse Domains</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Abstract Section -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Real-world Table-Text question answering (QA) tasks require models that can reason across long text and source tables, traversing multiple hops and executing complex operations such as aggregation. Yet existing benchmarks are small, manually curated—and therefore error-prone—and contain shallow questions that seldom demand more than two hops or invoke aggregations, grouping, or other advanced analytical operations expressible in natural-language queries.
+            </p>
+            <p>
+              We present <strong>SPARTA</strong>, an end-to-end construction framework that automatically generates large-scale Table-Text QA benchmarks with lightweight human validation, requiring only <strong>one quarter of the annotation time</strong> of HybridQA. The framework first constructs a reference fact database by enriching each source table with grounding tables whose tuples are atomic facts automatically extracted from the accompanying unstructured passages, then synthesizes nested queries whose number of nested predicates matches the desired hop count.
+            </p>
+            <p>
+              To ensure that every SQL statement is executable and that its verbalization yields a fluent, human-sounding question, we propose two novel techniques: <strong>provenance-based refinement</strong>, which rewrites any syntactically valid query that returns a non-empty result, and <strong>realistic-structure enforcement</strong>, which confines generation to post-order traversals of the query graph.
+            </p>
+            <div class="results-highlight">
+              <p>
+                On SPARTA, <strong>state-of-the-art models that reach over 70 F1 on HybridQA or over 50 F1 on OTT-QA drop by more than 30 F1 points</strong>, exposing fundamental weaknesses in current cross-modal reasoning.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Example Figure -->
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="figure-container">
+          <img src="SPARTA/Figures/An_example_from_SPARTA_benchmark.png" alt="Representative examples of SPARTA benchmark" loading="lazy"/>
+          <p class="figure-caption">
+            <strong>Figure 1:</strong> Representative examples from the SPARTA benchmark showing multi-hop reasoning across tables and text with varying query structures.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Contributions -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Key Contributions</h2>
+      <div class="columns is-multiline" style="margin-top: 2rem;">
+        <div class="column is-6">
+          <div class="contribution-card">
+            <div class="contribution-icon icon-purple">
+              <i class="fas fa-database"></i>
+            </div>
+            <h4 class="title is-5">Reference Fact Database</h4>
+            <p>Unifies heterogeneous evidence (tables + text) inside a single relational store, making all facts uniformly queryable via SQL.</p>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="contribution-card">
+            <div class="contribution-icon icon-blue">
+              <i class="fas fa-code-branch"></i>
+            </div>
+            <h4 class="title is-5">Provenance-Based Refinement</h4>
+            <p>Uses "why-not provenance" to identify and fix overly selective predicates, ensuring every generated query returns valid results.</p>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="contribution-card">
+            <div class="contribution-icon icon-pink">
+              <i class="fas fa-project-diagram"></i>
+            </div>
+            <h4 class="title is-5">Realistic-Structure Enforcement</h4>
+            <p>Constrains generation to post-order traversal of query graphs, producing human-like SQL that mirrors how analysts actually write queries.</p>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="contribution-card">
+            <div class="contribution-icon icon-green">
+              <i class="fas fa-check-double"></i>
+            </div>
+            <h4 class="title is-5">Quality-Assured Generation</h4>
+            <p>Achieves 0% annotation error rate with lightweight human validation, compared to 21-30% error rates in existing benchmarks.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benchmark Comparison Table -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Benchmark Comparison</h2>
+      <p class="has-text-centered" style="color: #64748b; margin-bottom: 2rem;">
+        SPARTA addresses critical limitations of existing Table-Text QA benchmarks
+      </p>
+
+      <div style="overflow-x: auto;">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Benchmark</th>
+              <th>Avg. Rows</th>
+              <th>Question Gen.</th>
+              <th>Grouping/Having</th>
+              <th>Deep Multi-hop (>3)</th>
+              <th>Error Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>TAT-QA</strong></td>
+              <td>9.4</td>
+              <td>Manual</td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td>30%</td>
+            </tr>
+            <tr>
+              <td><strong>FinQA</strong></td>
+              <td>6.4</td>
+              <td>Manual</td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td>27%</td>
+            </tr>
+            <tr>
+              <td><strong>MultiHierTT</strong></td>
+              <td>10.8</td>
+              <td>Manual</td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td>26%</td>
+            </tr>
+            <tr>
+              <td><strong>HybridQA</strong></td>
+              <td>15.7</td>
+              <td>Manual</td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td>21%</td>
+            </tr>
+            <tr>
+              <td><strong>OTT-QA</strong></td>
+              <td>15.7</td>
+              <td>Manual</td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td>21%</td>
+            </tr>
+            <tr class="sparta-row">
+              <td><strong>SPARTA (NBA)</strong></td>
+              <td>3,280</td>
+              <td>Auto (LLM)</td>
+              <td><i class="fas fa-check check-icon"></i></td>
+              <td><i class="fas fa-check check-icon"></i></td>
+              <td><strong>0%</strong></td>
+            </tr>
+            <tr class="sparta-row">
+              <td><strong>SPARTA (Movie)</strong></td>
+              <td>10,054</td>
+              <td>Auto (LLM)</td>
+              <td><i class="fas fa-check check-icon"></i></td>
+              <td><i class="fas fa-check check-icon"></i></td>
+              <td><strong>0%</strong></td>
+            </tr>
+            <tr class="sparta-row">
+              <td><strong>SPARTA (Medical)</strong></td>
+              <td>200</td>
+              <td>Auto (LLM)</td>
+              <td><i class="fas fa-check check-icon"></i></td>
+              <td><i class="fas fa-check check-icon"></i></td>
+              <td><strong>0%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Method Overview -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Method Overview</h2>
+
+      <div class="figure-container" style="margin-bottom: 2rem;">
+        <img src="SPARTA/Figures/sparta_overview.png" alt="SPARTA Pipeline Overview" loading="lazy"/>
+        <p class="figure-caption">
+          <strong>Figure 2:</strong> Overview of SPARTA pipeline: (1) Reference Fact Database Construction, (2) Query Generation, (3) Question Verbalisation.
+        </p>
+      </div>
+
+      <div class="pipeline-section">
+        <div class="pipeline-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Reference Fact Database Construction</h4>
+            <p>Source and grounding tables are merged into a unified reference fact database. Textual facts are decomposed into atomic propositions stored as tuples, making all facts uniformly queryable via SQL.</p>
+          </div>
+        </div>
+
+        <div class="pipeline-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Query Generation with Provenance-Based Refinement</h4>
+            <p>An LLM generates SQL queries with controlled hop counts. Two safeguards ensure quality: <em>provenance-based refinement</em> fixes empty-result queries using "why-not" analysis, and <em>realistic-structure enforcement</em> follows post-order traversal for human-like SQL.</p>
+          </div>
+        </div>
+
+        <div class="pipeline-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Question Verbalisation</h4>
+            <p>Each validated SQL query is converted to fluent natural language using AST-ICL, a state-of-the-art SQL-to-text model. Lightweight human validation ensures correctness with 75% less annotation time than traditional methods.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Provenance-Based Refinement -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Provenance-Based Refinement</h2>
+      <p class="has-text-centered" style="color: #64748b; margin-bottom: 2rem;">
+        Our novel technique that identifies and fixes overly selective predicates using database provenance
+      </p>
+
+      <div class="figure-container">
+        <img src="SPARTA/Figures/provenance_based_refinement_overview.png" alt="Provenance-based refinement process" loading="lazy"/>
+        <p class="figure-caption">
+          <strong>Figure 3:</strong> Provenance-based refinement process. When a query returns empty results, the system traces the failure using "why-not provenance", identifies the blocking predicate, and guides the LLM to relax overly restrictive conditions.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Experimental Results</h2>
+
+      <div class="results-highlight" style="margin-bottom: 2rem;">
+        <p style="font-size: 1.1rem; text-align: center;">
+          <strong>State-of-the-art models experience dramatic performance drops on SPARTA:</strong><br>
+          ODYSSEY drops from <strong>69.5 F1</strong> (HybridQA) to <strong>35.6 F1</strong> (SPARTA)<br>
+          HProPro drops from <strong>70.5 F1</strong> (HybridQA) to <strong>40.4 F1</strong> (SPARTA)
+        </p>
+      </div>
+
+      <div class="columns">
+        <div class="column is-6">
+          <div class="figure-container">
+            <img src="SPARTA/Figures/query_shape_separated_horizontal.png" alt="F1 scores across tree configurations" loading="lazy"/>
+            <p class="figure-caption">
+              <strong>Figure 4:</strong> F1 scores across query tree configurations. Performance degrades as depth and breadth increase.
+            </p>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="figure-container">
+            <img src="SPARTA/Figures/sql_operations_separated_horizontal.png" alt="F1 scores across SQL operations" loading="lazy"/>
+            <p class="figure-caption">
+              <strong>Figure 5:</strong> F1 scores across analytical operations. Models struggle with GROUP BY, ORDER BY, and aggregation.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="figure-container" style="margin-top: 2rem;">
+        <img src="SPARTA/Figures/naturalness.png" alt="Query naturalness comparison" loading="lazy"/>
+        <p class="figure-caption">
+          <strong>Figure 6:</strong> Query naturalness evaluation comparing different generation methods. Our execution-guided approach with post-order traversal achieves the highest naturalness scores.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Example -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="interactive-demo">
+        <h3 class="demo-title"><i class="fas fa-lightbulb"></i>&nbsp; Example from SPARTA Benchmark</h3>
+
+        <div class="example-card">
+          <div class="example-label">Natural Language Question <span class="hop-badge">4-Hop</span></div>
+          <div class="example-text">
+            "What is the average salary of players who scored more than 20 points in games where the home team won by more than 10 points against teams from the Eastern Conference?"
+          </div>
+        </div>
+
+        <div class="example-card">
+          <div class="example-label">Generated SQL Query</div>
+          <div class="sql-code">
+            <span class="sql-keyword">SELECT</span> <span class="sql-function">AVG</span>(salary) <span class="sql-keyword">FROM</span> player_salaries<br>
+            <span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (<br>
+            &nbsp;&nbsp;<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> game_stats<br>
+            &nbsp;&nbsp;<span class="sql-keyword">WHERE</span> points > <span class="sql-number">20</span> <span class="sql-keyword">AND</span> game_id <span class="sql-keyword">IN</span> (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="sql-keyword">SELECT</span> game_id <span class="sql-keyword">FROM</span> games<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="sql-keyword">WHERE</span> home_score - away_score > <span class="sql-number">10</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="sql-keyword">AND</span> away_team <span class="sql-keyword">IN</span> (<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sql-keyword">SELECT</span> team_name <span class="sql-keyword">FROM</span> teams<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sql-keyword">WHERE</span> conference = <span class="sql-string">'Eastern'</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;)<br>
+            &nbsp;&nbsp;)<br>
+            )
+          </div>
+        </div>
+
+        <div class="example-card">
+          <div class="example-label">Answer</div>
+          <div class="example-text" style="font-size: 1.5rem; font-weight: 700; color: #86efac;">
+            $8,547,230
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study -->
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Case Study</h2>
+      <div class="figure-container">
+        <img src="SPARTA/Figures/case_study.png" alt="Case study showing model failures" loading="lazy"/>
+        <p class="figure-caption">
+          <strong>Figure 7:</strong> Case study illustrating typical failure modes of current Table-Text QA models on SPARTA benchmark questions.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BibTeX Citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@inproceedings{sparta2025,
+  title={SPARTA: Provenance-Guided Quality-Assured Table-Text QA Benchmark Generation},
+  author={Anonymous},
+  booktitle={Under Review},
+  year={2025}
+}</code></pre>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content" style="text-align: center;">
+            <p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.
+              <br>
+              <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">
+                Creative Commons Attribution-ShareAlike 4.0 International License
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  </main>
+</body>
+</html>

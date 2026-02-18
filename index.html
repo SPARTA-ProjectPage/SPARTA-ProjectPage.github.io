@@ -445,6 +445,29 @@
     .sql-string { color: #86efac; }
     .sql-number { color: #fbbf24; }
 
+    .reasoning-steps {
+      margin: 0; padding: 0 0 0 1.25rem;
+      list-style: none; counter-reset: reasoning;
+    }
+    .reasoning-steps li {
+      position: relative; padding: 0.4rem 0 0.4rem 0.5rem;
+      font-size: 0.9rem; line-height: 1.5;
+      color: rgba(255,255,255,0.85);
+      counter-increment: reasoning;
+    }
+    .reasoning-steps li::before {
+      content: counter(reasoning);
+      position: absolute; left: -1.25rem;
+      width: 1.2rem; height: 1.2rem;
+      background: linear-gradient(135deg, #a78bfa, #ec4899);
+      border-radius: 50%; font-size: 0.7rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      color: white; top: 0.5rem;
+    }
+    .reasoning-steps li + li {
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
     .domain-badge {
       display: inline-block;
       padding: 0.25rem 0.75rem;
@@ -477,6 +500,7 @@
     .sparta-slide.active .example-card:nth-child(1) { animation: cardSlideIn 0.35s ease-out 0.0s both; }
     .sparta-slide.active .example-card:nth-child(2) { animation: cardSlideIn 0.35s ease-out 0.1s both; }
     .sparta-slide.active .example-card:nth-child(3) { animation: cardSlideIn 0.35s ease-out 0.2s both; }
+    .sparta-slide.active .example-card:nth-child(4) { animation: cardSlideIn 0.35s ease-out 0.3s both; }
     @keyframes cardSlideIn {
       from { opacity: 0; transform: translateX(30px); }
       to { opacity: 1; transform: translateX(0); }
@@ -484,6 +508,7 @@
     .sparta-slide.active.slide-rev .example-card:nth-child(1) { animation: cardSlideInRev 0.35s ease-out 0.0s both; }
     .sparta-slide.active.slide-rev .example-card:nth-child(2) { animation: cardSlideInRev 0.35s ease-out 0.1s both; }
     .sparta-slide.active.slide-rev .example-card:nth-child(3) { animation: cardSlideInRev 0.35s ease-out 0.2s both; }
+    .sparta-slide.active.slide-rev .example-card:nth-child(4) { animation: cardSlideInRev 0.35s ease-out 0.3s both; }
     @keyframes cardSlideInRev {
       from { opacity: 0; transform: translateX(-30px); }
       to { opacity: 1; transform: translateX(0); }
@@ -870,6 +895,14 @@
   <span class="sql-keyword">AND</span> number_of_steal > <span class="sql-number">1</span></pre></div>
             </div>
             <div class="example-card">
+              <div class="example-label">Required Reasoning</div>
+              <ol class="reasoning-steps">
+                <li>Find Point Guards drafted between 2000 and 2005 (Table: nba_player_information)</li>
+                <li>Filter games with &gt;4 three-pointers, &gt;8 field goals, &gt;1 steal (Table: nba_player_game_stats)</li>
+                <li>Join results via nested subquery to find matching players</li>
+              </ol>
+            </div>
+            <div class="example-card">
               <div class="example-label">Answer</div>
               <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Chris Paul</div>
             </div>
@@ -900,6 +933,14 @@
   <span class="sql-keyword">AND</span> position = <span class="sql-string">'Center'</span></pre></div>
             </div>
             <div class="example-card">
+              <div class="example-label">Required Reasoning</div>
+              <ol class="reasoning-steps">
+                <li>Find players with salary &gt;1M in 2016-17 season (Table: nba_player_affiliation)</li>
+                <li>Filter for 1st round draft picks who play Center (Table: nba_player_information)</li>
+                <li>Join results via nested subquery to find matching players</li>
+              </ol>
+            </div>
+            <div class="example-card">
               <div class="example-label">Answer</div>
               <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Alex Len, Al Horford, Andre Drummond, ...</div>
             </div>
@@ -926,6 +967,13 @@
     <span class="sql-keyword">WHERE</span> hospital_branch = <span class="sql-string">'Central Hospital'</span>
       <span class="sql-keyword">AND</span> years_experience > <span class="sql-number">20</span>
   )</pre></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Required Reasoning</div>
+              <ol class="reasoning-steps">
+                <li>Find doctors at Central Hospital with &gt;20 years of experience (Table: doctors)</li>
+                <li>Find patients who have appointments with those doctors (Table: appointments)</li>
+              </ol>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -963,6 +1011,14 @@
 <span class="sql-keyword">GROUP BY</span> birthyear</pre></div>
             </div>
             <div class="example-card">
+              <div class="example-label">Required Reasoning</div>
+              <ol class="reasoning-steps">
+                <li>Find players with lane agility &gt;11.5s and sprint &lt;3.35s (Table: nba_draft_combine_stats)</li>
+                <li>Find players with &gt;10 field goals and &gt;8 rebounds (Table: nba_player_game_stats)</li>
+                <li>Intersect both conditions and retrieve birth years (Breadth-2 join via nba_player_information)</li>
+              </ol>
+            </div>
+            <div class="example-card">
               <div class="example-label">Answer</div>
               <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">1984, 1985, 1989, ...</div>
             </div>
@@ -997,6 +1053,14 @@
       <span class="sql-keyword">AND</span> median_rating = <span class="sql-number">6</span>
       <span class="sql-keyword">AND</span> movie_title &lt;&gt; <span class="sql-string">'Kolonya Cumhuriyeti'</span>
   )</pre></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Required Reasoning</div>
+              <ol class="reasoning-steps">
+                <li>Find movies where Vincent D Onofrio is an actor (Table: role_mapping)</li>
+                <li>Find movies with avg_rating &gt; 5 and median_rating = 6 (Table: ratings)</li>
+                <li>Intersect both conditions and exclude specific movie (Breadth-2 join)</li>
+              </ol>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -1037,6 +1101,14 @@
 <span class="sql-keyword">LIMIT</span> <span class="sql-number">5</span></pre></div>
             </div>
             <div class="example-card">
+              <div class="example-label">Required Reasoning</div>
+              <ol class="reasoning-steps">
+                <li>Find players with salary &gt;2M in 2004-05 season (Table: nba_player_affiliation)</li>
+                <li>Find players who won DPOY award after 2000 (Table: nba_player_award)</li>
+                <li>Intersect both, filter for 1st round Centers, sort and limit (Breadth-2 join)</li>
+              </ol>
+            </div>
+            <div class="example-card">
               <div class="example-label">Answer</div>
               <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Dwight Howard, Ben Wallace, ...</div>
             </div>
@@ -1070,6 +1142,14 @@
   <span class="sql-keyword">AND</span> date_of_birth > <span class="sql-string">'1980-01-01'</span>
   <span class="sql-keyword">AND</span> gender = <span class="sql-string">'M'</span>
   <span class="sql-keyword">AND</span> insurance_provider = <span class="sql-string">'MedCare Plus'</span></pre></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Required Reasoning</div>
+              <ol class="reasoning-steps">
+                <li>Compute average of failed payments exceeding 2500 (Nested aggregation: billing)</li>
+                <li>Find patients with payments above that average (Table: billing)</li>
+                <li>Filter male patients born after 1980 with MedCare Plus (Table: patients)</li>
+              </ol>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -1106,6 +1186,14 @@
   <span class="sql-keyword">AND</span> number_of_rebound > <span class="sql-number">8</span></pre></div>
             </div>
             <div class="example-card">
+              <div class="example-label">Required Reasoning</div>
+              <ol class="reasoning-steps">
+                <li>Compute average height of Point Guards drafted after 1990 (Nested aggregation)</li>
+                <li>Find Centers taller than that average (Table: nba_player_information)</li>
+                <li>Filter games with &gt;8 rebounds (Table: nba_player_game_stats)</li>
+              </ol>
+            </div>
+            <div class="example-card">
               <div class="example-label">Answer</div>
               <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Alex Len, Al Horford, Andre Drummond, ...</div>
             </div>
@@ -1138,6 +1226,14 @@
   )
   <span class="sql-keyword">AND</span> gender = <span class="sql-string">'F'</span>
   <span class="sql-keyword">AND</span> registration_date > <span class="sql-string">'2021-09-02'</span></pre></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Required Reasoning</div>
+              <ol class="reasoning-steps">
+                <li>Compute average of failed payments exceeding 2500 (Nested aggregation: billing)</li>
+                <li>Find patients with billed amounts above that average (Table: billing)</li>
+                <li>Filter for female patients registered after 2021-09-02 (Table: patients)</li>
+              </ol>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -1175,6 +1271,14 @@
   )</pre></div>
             </div>
             <div class="example-card">
+              <div class="example-label">Required Reasoning</div>
+              <ol class="reasoning-steps">
+                <li>Find movies where John Abraham is an actor (Table: role_mapping)</li>
+                <li>Find movies with median_rating &gt; 5 and avg_rating &gt; 4 (Table: ratings)</li>
+                <li>Intersect both conditions and count matching movies (Breadth-2 join)</li>
+              </ol>
+            </div>
+            <div class="example-card">
               <div class="example-label">Answer</div>
               <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">1</div>
             </div>
@@ -1208,6 +1312,14 @@
   )
   <span class="sql-keyword">AND</span> position = <span class="sql-string">'Center'</span>
   <span class="sql-keyword">AND</span> draft_year > <span class="sql-number">1995</span></pre></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Required Reasoning</div>
+              <ol class="reasoning-steps">
+                <li>Compute maximum salary of Suns players (Nested aggregation: nba_player_affiliation)</li>
+                <li>Find Lakers players with salary above that max and &gt;20M (Table: nba_player_affiliation)</li>
+                <li>Filter for Centers drafted after 1995 and return max height (Table: nba_player_information)</li>
+              </ol>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -1250,6 +1362,15 @@
   )</pre></div>
             </div>
             <div class="example-card">
+              <div class="example-label">Required Reasoning</div>
+              <ol class="reasoning-steps">
+                <li>Find max points of Thunder when Q1 &gt; 25 (Subquery 1: nba_team_game_stats)</li>
+                <li>Find max points of teams with &gt;100 pts and &gt;30% 3pt FG (Subquery 2: nba_team_game_stats)</li>
+                <li>Find teams with arena capacity &gt;20,000 excluding Pistons (Subquery 3: nba_team_information)</li>
+                <li>Combine all three conditions (Breadth-3 join)</li>
+              </ol>
+            </div>
+            <div class="example-card">
               <div class="example-label">Answer</div>
               <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Bulls</div>
             </div>
@@ -1289,6 +1410,15 @@
       <span class="sql-keyword">AND</span> total_votes > <span class="sql-number">100</span>
     <span class="sql-keyword">GROUP BY</span> movie_title
   )</pre></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Required Reasoning</div>
+              <ol class="reasoning-steps">
+                <li>Find movies directed by Vivek Athreya (Subquery 1: director_mapping)</li>
+                <li>Exclude movies featuring Matt Smith as actor (Subquery 2: role_mapping)</li>
+                <li>Find movies with median_rating &gt; 5 and &gt;100 votes (Subquery 3: ratings)</li>
+                <li>Combine all three conditions (Breadth-3 join)</li>
+              </ol>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>

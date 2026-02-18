@@ -459,29 +459,107 @@
     .domain-movie { background: #fce7f3; color: #9d174d; }
     .domain-medical { background: #d1fae5; color: #065f46; }
 
-    .interactive-demo .carousel .carousel-container .carousel-item {
-      padding: 0 0.5rem;
+    /* Custom Carousel */
+    .sparta-carousel { position: relative; }
+    .sparta-carousel-viewport { overflow: hidden; border-radius: 16px; min-height: 200px; }
+    .sparta-carousel-track { position: relative; }
+    .sparta-slide { display: none; animation: spartaFadeIn 0.45s ease-out; }
+    .sparta-slide.active { display: block; }
+    @keyframes spartaFadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .interactive-demo .carousel-navigation .carousel-nav-left,
-    .interactive-demo .carousel-navigation .carousel-nav-right {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: white;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
+    .sparta-slide.active .example-card:nth-child(1) { animation: cardReveal 0.4s ease-out 0.0s both; }
+    .sparta-slide.active .example-card:nth-child(2) { animation: cardReveal 0.4s ease-out 0.12s both; }
+    .sparta-slide.active .example-card:nth-child(3) { animation: cardReveal 0.4s ease-out 0.24s both; }
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    .interactive-demo .carousel-navigation .carousel-nav-left:hover,
-    .interactive-demo .carousel-navigation .carousel-nav-right:hover {
-      background: rgba(255, 255, 255, 0.3);
+    .example-card {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
-    .interactive-demo .carousel .carousel-indicator .indicator-item .indicator-style {
-      background: rgba(255, 255, 255, 0.3);
-      border: none;
+    .example-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(99, 102, 241, 0.25);
+      border-color: rgba(255, 255, 255, 0.4);
     }
-    .interactive-demo .carousel .carousel-indicator .indicator-item.is-active .indicator-style {
-      background: white;
+    .sql-code pre {
+      margin: 0; padding: 0; font-family: inherit; font-size: inherit;
+      color: inherit; background: none; white-space: pre;
+      overflow-x: auto; line-height: 1.6;
     }
+    .sql-indent { color: rgba(255,255,255,0.15); }
+    .sql-code::-webkit-scrollbar { height: 6px; }
+    .sql-code::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 3px; }
+    .sql-code::-webkit-scrollbar-thumb { background: rgba(139, 92, 246, 0.5); border-radius: 3px; }
+    .sql-code::-webkit-scrollbar-thumb:hover { background: rgba(139, 92, 246, 0.8); }
+
+    .sparta-filter-tabs {
+      display: flex; justify-content: center; gap: 0.5rem;
+      margin-bottom: 1.5rem; flex-wrap: wrap;
+    }
+    .sparta-filter-tab {
+      padding: 0.5rem 1.2rem; border-radius: 50px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      background: transparent; color: rgba(255,255,255,0.7);
+      cursor: pointer; font-weight: 600; font-size: 0.85rem;
+      transition: all 0.25s ease; font-family: inherit;
+    }
+    .sparta-filter-tab:hover { border-color: rgba(255,255,255,0.5); color: white; }
+    .sparta-filter-tab.active {
+      background: rgba(255,255,255,0.15);
+      border-color: rgba(255,255,255,0.6); color: white;
+    }
+
+    .sparta-carousel-nav {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.5rem; margin-top: 1.5rem;
+    }
+    .sparta-nav-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.1); color: white;
+      cursor: pointer; display: flex; align-items: center;
+      justify-content: center; transition: all 0.25s ease; font-size: 1rem;
+    }
+    .sparta-nav-btn:hover {
+      background: rgba(255,255,255,0.25);
+      border-color: rgba(255,255,255,0.6); transform: scale(1.08);
+    }
+    .sparta-counter {
+      color: rgba(255,255,255,0.9); font-weight: 700; font-size: 0.95rem;
+      font-variant-numeric: tabular-nums; min-width: 60px; text-align: center;
+    }
+    .sparta-progress-bar {
+      height: 3px; background: rgba(255,255,255,0.15);
+      border-radius: 2px; overflow: hidden; margin-top: 1rem;
+      max-width: 400px; margin-left: auto; margin-right: auto;
+    }
+    .sparta-progress-fill {
+      height: 100%; background: linear-gradient(90deg, #a78bfa, #ec4899);
+      border-radius: 2px; transition: width 0.35s ease;
+    }
+    .sparta-complexity {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.75rem; margin-top: 0.75rem;
+      font-size: 0.8rem; color: rgba(255,255,255,0.6);
+    }
+    .sparta-complexity-dots { display: flex; gap: 4px; }
+    .sparta-complexity-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,0.15); transition: background 0.3s ease;
+    }
+    .sparta-complexity-dot.filled {
+      background: linear-gradient(135deg, #a78bfa, #ec4899);
+    }
+    .demo-title-gradient {
+      background: linear-gradient(90deg, #e0e7ff, #c4b5fd, #f9a8d4, #e0e7ff);
+      background-size: 200% auto;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; animation: gradientShift 4s linear infinite;
+    }
+    @keyframes gradientShift { to { background-position: 200% center; } }
 
     @media screen and (max-width: 768px) {
       .hero-title-sparta {
@@ -520,13 +598,13 @@
 
             <div class="column has-text-centered" style="margin-top: 2rem;">
               <div class="publication-links">
-                <!-- Paper PDF - Coming Soon -->
+                <!-- Paper PDF -->
                 <span class="link-block">
-                  <a class="external-link button is-normal is-rounded coming-soon-btn" disabled>
+                  <a href="https://openreview.net/pdf?id=8KE9qvKhM4" target="_blank" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                     </span>
-                    <span>Paper<span class="coming-soon-text">(Coming Soon)</span></span>
+                    <span>Paper</span>
                   </a>
                 </span>
 
@@ -540,13 +618,23 @@
                   </a>
                 </span>
 
-                <!-- Code - Coming Soon -->
+                <!-- Code -->
                 <span class="link-block">
-                  <a class="external-link button is-normal is-rounded coming-soon-btn" disabled>
+                  <a href="https://github.com/pshlego/SPARTA" target="_blank" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
-                    <span>Code<span class="coming-soon-text">(Coming Soon)</span></span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <!-- Hugging Face -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/datasets/pshlego/SPARTA" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-database"></i>
+                    </span>
+                    <span>Dataset</span>
                   </a>
                 </span>
 
@@ -583,6 +671,20 @@
     </div>
   </section>
 
+  <!-- Example Figure -->
+  <section class="hero is-small">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="figure-container">
+          <img src="SPARTA/Figures/An_example_from_SPARTA_benchmark.svg" alt="Representative examples of SPARTA benchmark" loading="lazy"/>
+          <p class="figure-caption">
+            <strong>Figure 1:</strong> Representative examples from the SPARTA benchmark showing multi-hop reasoning across tables and text with varying query structures.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Why SPARTA? Section -->
   <section class="section">
     <div class="container is-max-desktop">
@@ -611,177 +713,25 @@
     </div>
   </section>
 
-  <!-- Example Figure -->
-  <section class="hero is-small">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="figure-container">
-          <img src="SPARTA/Figures/An_example_from_SPARTA_benchmark.svg" alt="Representative examples of SPARTA benchmark" loading="lazy"/>
-          <p class="figure-caption">
-            <strong>Figure 1:</strong> Representative examples from the SPARTA benchmark showing multi-hop reasoning across tables and text with varying query structures.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Interactive Examples Carousel -->
   <section class="section">
     <div class="container is-max-desktop">
       <div class="interactive-demo">
-        <h3 class="demo-title"><i class="fas fa-lightbulb"></i>&nbsp; Examples from SPARTA Benchmark</h3>
+        <h3 class="demo-title"><i class="fas fa-lightbulb"></i>&nbsp; <span class="demo-title-gradient">Examples from SPARTA Benchmark</span></h3>
 
-        <div class="examples-carousel" data-autoplay="false">
+        <div class="sparta-filter-tabs">
+          <button class="sparta-filter-tab active" data-filter="all">All</button>
+          <button class="sparta-filter-tab" data-filter="nba">NBA</button>
+          <button class="sparta-filter-tab" data-filter="movie">Movie</button>
+          <button class="sparta-filter-tab" data-filter="medical">Medical</button>
+        </div>
 
-          <!-- Example 1 -->
-          <div class="item">
-            <div class="example-card">
-              <div class="example-label">
-                Natural Language Question
-                <span class="domain-badge domain-nba">NBA</span>
-                <span class="hop-badge">Height: 0</span>
-                <span class="hop-badge">Breadth: 0</span>
-              </div>
-              <div class="example-text">"Which player won the NBA MVP award in the 1986 season?"</div>
-            </div>
-            <div class="example-card">
-              <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_award <span class="sql-keyword">WHERE</span> season = <span class="sql-number">1986</span> <span class="sql-keyword">AND</span> award = <span class="sql-string">'nba mvp'</span></div>
-            </div>
-            <div class="example-card">
-              <div class="example-label">Answer</div>
-              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Larry Bird</div>
-            </div>
-          </div>
+        <div class="sparta-carousel">
+          <div class="sparta-carousel-viewport">
+            <div class="sparta-carousel-track">
 
-          <!-- Example 2 -->
-          <div class="item">
-            <div class="example-card">
-              <div class="example-label">
-                Natural Language Question
-                <span class="domain-badge domain-nba">NBA</span>
-                <span class="hop-badge">Height: 0</span>
-                <span class="hop-badge">Breadth: 0</span>
-              </div>
-              <div class="example-text">"What are the names of the players who scored more than 15 points and rebounded more than 5 times in a game?"</div>
-            </div>
-            <div class="example-card">
-              <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_game_stats <span class="sql-keyword">WHERE</span> number_of_points > <span class="sql-number">15</span> <span class="sql-keyword">AND</span> number_of_rebound > <span class="sql-number">5</span></div>
-            </div>
-            <div class="example-card">
-              <div class="example-label">Answer</div>
-              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Langston Galloway, Quincy Acy, Larry Nance Jr., ...</div>
-            </div>
-          </div>
-
-          <!-- Example 3 -->
-          <div class="item">
-            <div class="example-card">
-              <div class="example-label">
-                Natural Language Question
-                <span class="domain-badge domain-movie">Movie</span>
-                <span class="hop-badge">Height: 0</span>
-                <span class="hop-badge">Breadth: 0</span>
-              </div>
-              <div class="example-text">"In which movies did Riteish Deshmukh act?"</div>
-            </div>
-            <div class="example-card">
-              <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> movie_title <span class="sql-keyword">FROM</span> role_mapping <span class="sql-keyword">WHERE</span> category = <span class="sql-string">'actor'</span> <span class="sql-keyword">AND</span> name = <span class="sql-string">'Riteish Deshmukh'</span></div>
-            </div>
-            <div class="example-card">
-              <div class="example-label">Answer</div>
-              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Marjaavaan, Mauli</div>
-            </div>
-          </div>
-
-          <!-- Example 4 -->
-          <div class="item">
-            <div class="example-card">
-              <div class="example-label">
-                Natural Language Question
-                <span class="domain-badge domain-movie">Movie</span>
-                <span class="hop-badge">Height: 0</span>
-                <span class="hop-badge">Breadth: 0</span>
-              </div>
-              <div class="example-text">"What is the total number of movies with a median rating greater than 5 and an average rating greater than 5.5?"</div>
-            </div>
-            <div class="example-card">
-              <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> <span class="sql-function">COUNT</span>(movie_title) <span class="sql-keyword">AS</span> total_movies <span class="sql-keyword">FROM</span> ratings <span class="sql-keyword">WHERE</span> median_rating > <span class="sql-number">5</span> <span class="sql-keyword">AND</span> avg_rating > <span class="sql-number">5.5</span></div>
-            </div>
-            <div class="example-card">
-              <div class="example-label">Answer</div>
-              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">4877</div>
-            </div>
-          </div>
-
-          <!-- Example 5 -->
-          <div class="item">
-            <div class="example-card">
-              <div class="example-label">
-                Natural Language Question
-                <span class="domain-badge domain-nba">NBA</span>
-                <span class="hop-badge">Height: 0</span>
-                <span class="hop-badge">Breadth: 0</span>
-              </div>
-              <div class="example-text">"Which Western Conference teams faced the Celtics more than once in the Finals?"</div>
-            </div>
-            <div class="example-card">
-              <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> western_champion_name <span class="sql-keyword">FROM</span> nba_champion_history <span class="sql-keyword">WHERE</span> nba_champion_name = <span class="sql-string">'Celtics'</span> <span class="sql-keyword">GROUP BY</span> western_champion_name <span class="sql-keyword">HAVING</span> <span class="sql-function">COUNT</span>(western_champion_name) > <span class="sql-number">1</span></div>
-            </div>
-            <div class="example-card">
-              <div class="example-label">Answer</div>
-              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Rockets, Lakers</div>
-            </div>
-          </div>
-
-          <!-- Example 6 -->
-          <div class="item">
-            <div class="example-card">
-              <div class="example-label">
-                Natural Language Question
-                <span class="domain-badge domain-medical">Medical</span>
-                <span class="hop-badge">Height: 0</span>
-                <span class="hop-badge">Breadth: 0</span>
-              </div>
-              <div class="example-text">"What is the maximum years of experience of a pediatrician at Central Hospital?"</div>
-            </div>
-            <div class="example-card">
-              <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> <span class="sql-function">MAX</span>(years_experience) <span class="sql-keyword">FROM</span> doctors <span class="sql-keyword">WHERE</span> hospital_branch = <span class="sql-string">'Central Hospital'</span> <span class="sql-keyword">AND</span> specialization = <span class="sql-string">'Pediatrics'</span></div>
-            </div>
-            <div class="example-card">
-              <div class="example-label">Answer</div>
-              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">28</div>
-            </div>
-          </div>
-
-          <!-- Example 7 -->
-          <div class="item">
-            <div class="example-card">
-              <div class="example-label">
-                Natural Language Question
-                <span class="domain-badge domain-nba">NBA</span>
-                <span class="hop-badge">Height: 0</span>
-                <span class="hop-badge">Breadth: 0</span>
-              </div>
-              <div class="example-text">"What is the highest salary of Kevin McHale while playing for the Celtics?"</div>
-            </div>
-            <div class="example-card">
-              <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> <span class="sql-function">MAX</span>(salary) <span class="sql-keyword">FROM</span> nba_player_affiliation <span class="sql-keyword">WHERE</span> player_name = <span class="sql-string">'Kevin McHale'</span> <span class="sql-keyword">AND</span> team_name = <span class="sql-string">'Celtics'</span></div>
-            </div>
-            <div class="example-card">
-              <div class="example-label">Answer</div>
-              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">3,500,000</div>
-            </div>
-          </div>
-
-          <!-- Example 8 -->
-          <div class="item">
+          <!-- Example 1: Height 1, Breadth 1 -->
+          <div class="sparta-slide" data-domain="nba" data-height="1" data-breadth="1">
             <div class="example-card">
               <div class="example-label">
                 Natural Language Question
@@ -793,7 +743,17 @@
             </div>
             <div class="example-card">
               <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_game_stats <span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_information <span class="sql-keyword">WHERE</span> position = <span class="sql-string">'Point Guard'</span> <span class="sql-keyword">AND</span> draft_year <span class="sql-keyword">BETWEEN</span> <span class="sql-number">2000</span> <span class="sql-keyword">AND</span> <span class="sql-number">2005</span>) <span class="sql-keyword">AND</span> number_of_three_point_field_goals_made > <span class="sql-number">4</span> <span class="sql-keyword">AND</span> number_of_field_goals_made > <span class="sql-number">8</span> <span class="sql-keyword">AND</span> number_of_steal > <span class="sql-number">1</span></div>
+              <div class="sql-code"><pre><span class="sql-keyword">SELECT</span> player_name
+<span class="sql-keyword">FROM</span> nba_player_game_stats
+<span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> player_name
+    <span class="sql-keyword">FROM</span> nba_player_information
+    <span class="sql-keyword">WHERE</span> position = <span class="sql-string">'Point Guard'</span>
+      <span class="sql-keyword">AND</span> draft_year <span class="sql-keyword">BETWEEN</span> <span class="sql-number">2000</span> <span class="sql-keyword">AND</span> <span class="sql-number">2005</span>
+  )
+  <span class="sql-keyword">AND</span> number_of_three_point_field_goals_made > <span class="sql-number">4</span>
+  <span class="sql-keyword">AND</span> number_of_field_goals_made > <span class="sql-number">8</span>
+  <span class="sql-keyword">AND</span> number_of_steal > <span class="sql-number">1</span></pre></div>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -801,8 +761,8 @@
             </div>
           </div>
 
-          <!-- Example 9 -->
-          <div class="item">
+          <!-- Example 2 -->
+          <div class="sparta-slide" data-domain="nba" data-height="1" data-breadth="1">
             <div class="example-card">
               <div class="example-label">
                 Natural Language Question
@@ -814,7 +774,16 @@
             </div>
             <div class="example-card">
               <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_information <span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_affiliation <span class="sql-keyword">WHERE</span> salary > <span class="sql-number">1000000</span> <span class="sql-keyword">AND</span> season = <span class="sql-string">'2016-17'</span>) <span class="sql-keyword">AND</span> draft_round = <span class="sql-string">'1st round'</span> <span class="sql-keyword">AND</span> position = <span class="sql-string">'Center'</span></div>
+              <div class="sql-code"><pre><span class="sql-keyword">SELECT</span> player_name
+<span class="sql-keyword">FROM</span> nba_player_information
+<span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> player_name
+    <span class="sql-keyword">FROM</span> nba_player_affiliation
+    <span class="sql-keyword">WHERE</span> salary > <span class="sql-number">1000000</span>
+      <span class="sql-keyword">AND</span> season = <span class="sql-string">'2016-17'</span>
+  )
+  <span class="sql-keyword">AND</span> draft_round = <span class="sql-string">'1st round'</span>
+  <span class="sql-keyword">AND</span> position = <span class="sql-string">'Center'</span></pre></div>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -822,8 +791,8 @@
             </div>
           </div>
 
-          <!-- Example 10 -->
-          <div class="item">
+          <!-- Example 3 -->
+          <div class="sparta-slide" data-domain="medical" data-height="1" data-breadth="1">
             <div class="example-card">
               <div class="example-label">
                 Natural Language Question
@@ -835,7 +804,14 @@
             </div>
             <div class="example-card">
               <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> patient_name <span class="sql-keyword">FROM</span> appointments <span class="sql-keyword">WHERE</span> doctor_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> name <span class="sql-keyword">FROM</span> doctors <span class="sql-keyword">WHERE</span> hospital_branch = <span class="sql-string">'Central Hospital'</span> <span class="sql-keyword">AND</span> years_experience > <span class="sql-number">20</span>)</div>
+              <div class="sql-code"><pre><span class="sql-keyword">SELECT</span> patient_name
+<span class="sql-keyword">FROM</span> appointments
+<span class="sql-keyword">WHERE</span> doctor_name <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> name
+    <span class="sql-keyword">FROM</span> doctors
+    <span class="sql-keyword">WHERE</span> hospital_branch = <span class="sql-string">'Central Hospital'</span>
+      <span class="sql-keyword">AND</span> years_experience > <span class="sql-number">20</span>
+  )</pre></div>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -843,8 +819,8 @@
             </div>
           </div>
 
-          <!-- Example 11 -->
-          <div class="item">
+          <!-- Example 4 -->
+          <div class="sparta-slide" data-domain="nba" data-height="1" data-breadth="2">
             <div class="example-card">
               <div class="example-label">
                 Natural Language Question
@@ -856,7 +832,21 @@
             </div>
             <div class="example-card">
               <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> birthyear <span class="sql-keyword">FROM</span> nba_player_information <span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_draft_combine_stats <span class="sql-keyword">WHERE</span> lane_agility_time > <span class="sql-number">11.5</span> <span class="sql-keyword">AND</span> three_quarter_sprint < <span class="sql-number">3.35</span>) <span class="sql-keyword">AND</span> player_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_game_stats <span class="sql-keyword">WHERE</span> number_of_field_goals_made > <span class="sql-number">10</span> <span class="sql-keyword">AND</span> number_of_rebound > <span class="sql-number">8</span>) <span class="sql-keyword">GROUP BY</span> birthyear</div>
+              <div class="sql-code"><pre><span class="sql-keyword">SELECT</span> birthyear
+<span class="sql-keyword">FROM</span> nba_player_information
+<span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> player_name
+    <span class="sql-keyword">FROM</span> nba_draft_combine_stats
+    <span class="sql-keyword">WHERE</span> lane_agility_time > <span class="sql-number">11.5</span>
+      <span class="sql-keyword">AND</span> three_quarter_sprint &lt; <span class="sql-number">3.35</span>
+  )
+  <span class="sql-keyword">AND</span> player_name <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> player_name
+    <span class="sql-keyword">FROM</span> nba_player_game_stats
+    <span class="sql-keyword">WHERE</span> number_of_field_goals_made > <span class="sql-number">10</span>
+      <span class="sql-keyword">AND</span> number_of_rebound > <span class="sql-number">8</span>
+  )
+<span class="sql-keyword">GROUP BY</span> birthyear</pre></div>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -864,8 +854,8 @@
             </div>
           </div>
 
-          <!-- Example 12 -->
-          <div class="item">
+          <!-- Example 5 -->
+          <div class="sparta-slide" data-domain="movie" data-height="1" data-breadth="2">
             <div class="example-card">
               <div class="example-label">
                 Natural Language Question
@@ -877,7 +867,22 @@
             </div>
             <div class="example-card">
               <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> title <span class="sql-keyword">FROM</span> movie <span class="sql-keyword">WHERE</span> title <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> movie_title <span class="sql-keyword">FROM</span> role_mapping <span class="sql-keyword">WHERE</span> category = <span class="sql-string">'actor'</span> <span class="sql-keyword">AND</span> name = <span class="sql-string">'Vincent D Onofrio'</span> <span class="sql-keyword">AND</span> movie_title = title) <span class="sql-keyword">AND</span> title <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> movie_title <span class="sql-keyword">FROM</span> ratings <span class="sql-keyword">WHERE</span> avg_rating > <span class="sql-number">5</span> <span class="sql-keyword">AND</span> median_rating = <span class="sql-number">6</span> <span class="sql-keyword">AND</span> movie_title <> <span class="sql-string">'Kolonya Cumhuriyeti'</span>)</div>
+              <div class="sql-code"><pre><span class="sql-keyword">SELECT</span> title
+<span class="sql-keyword">FROM</span> movie
+<span class="sql-keyword">WHERE</span> title <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> movie_title
+    <span class="sql-keyword">FROM</span> role_mapping
+    <span class="sql-keyword">WHERE</span> category = <span class="sql-string">'actor'</span>
+      <span class="sql-keyword">AND</span> name = <span class="sql-string">'Vincent D Onofrio'</span>
+      <span class="sql-keyword">AND</span> movie_title = title
+  )
+  <span class="sql-keyword">AND</span> title <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> movie_title
+    <span class="sql-keyword">FROM</span> ratings
+    <span class="sql-keyword">WHERE</span> avg_rating > <span class="sql-number">5</span>
+      <span class="sql-keyword">AND</span> median_rating = <span class="sql-number">6</span>
+      <span class="sql-keyword">AND</span> movie_title &lt;&gt; <span class="sql-string">'Kolonya Cumhuriyeti'</span>
+  )</pre></div>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -885,8 +890,8 @@
             </div>
           </div>
 
-          <!-- Example 13 -->
-          <div class="item">
+          <!-- Example 6 -->
+          <div class="sparta-slide" data-domain="nba" data-height="1" data-breadth="2">
             <div class="example-card">
               <div class="example-label">
                 Natural Language Question
@@ -898,7 +903,24 @@
             </div>
             <div class="example-card">
               <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_information <span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_affiliation <span class="sql-keyword">WHERE</span> salary > <span class="sql-number">2000000</span> <span class="sql-keyword">AND</span> season = <span class="sql-string">'2004-05'</span>) <span class="sql-keyword">AND</span> player_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_award <span class="sql-keyword">WHERE</span> season > <span class="sql-number">2000</span> <span class="sql-keyword">AND</span> award = <span class="sql-string">'dpoy'</span>) <span class="sql-keyword">AND</span> position = <span class="sql-string">'Center'</span> <span class="sql-keyword">AND</span> draft_round = <span class="sql-string">'1st round'</span> <span class="sql-keyword">ORDER BY</span> draft_year <span class="sql-keyword">DESC</span>, birthyear <span class="sql-keyword">ASC</span> <span class="sql-keyword">LIMIT</span> <span class="sql-number">5</span></div>
+              <div class="sql-code"><pre><span class="sql-keyword">SELECT</span> player_name
+<span class="sql-keyword">FROM</span> nba_player_information
+<span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> player_name
+    <span class="sql-keyword">FROM</span> nba_player_affiliation
+    <span class="sql-keyword">WHERE</span> salary > <span class="sql-number">2000000</span>
+      <span class="sql-keyword">AND</span> season = <span class="sql-string">'2004-05'</span>
+  )
+  <span class="sql-keyword">AND</span> player_name <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> player_name
+    <span class="sql-keyword">FROM</span> nba_player_award
+    <span class="sql-keyword">WHERE</span> season > <span class="sql-number">2000</span>
+      <span class="sql-keyword">AND</span> award = <span class="sql-string">'dpoy'</span>
+  )
+  <span class="sql-keyword">AND</span> position = <span class="sql-string">'Center'</span>
+  <span class="sql-keyword">AND</span> draft_round = <span class="sql-string">'1st round'</span>
+<span class="sql-keyword">ORDER BY</span> draft_year <span class="sql-keyword">DESC</span>, birthyear <span class="sql-keyword">ASC</span>
+<span class="sql-keyword">LIMIT</span> <span class="sql-number">5</span></pre></div>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -906,8 +928,8 @@
             </div>
           </div>
 
-          <!-- Example 14 -->
-          <div class="item">
+          <!-- Example 7 -->
+          <div class="sparta-slide" data-domain="medical" data-height="2" data-breadth="1">
             <div class="example-card">
               <div class="example-label">
                 Natural Language Question
@@ -919,7 +941,21 @@
             </div>
             <div class="example-card">
               <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> address <span class="sql-keyword">FROM</span> patients <span class="sql-keyword">WHERE</span> name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> patient_name <span class="sql-keyword">FROM</span> billing <span class="sql-keyword">WHERE</span> amount > (<span class="sql-keyword">SELECT</span> <span class="sql-function">AVG</span>(amount) <span class="sql-keyword">FROM</span> billing <span class="sql-keyword">WHERE</span> payment_status = <span class="sql-string">'Failed'</span> <span class="sql-keyword">AND</span> amount > <span class="sql-number">2500</span>)) <span class="sql-keyword">AND</span> date_of_birth > <span class="sql-string">'1980-01-01'</span> <span class="sql-keyword">AND</span> gender = <span class="sql-string">'M'</span> <span class="sql-keyword">AND</span> insurance_provider = <span class="sql-string">'MedCare Plus'</span></div>
+              <div class="sql-code"><pre><span class="sql-keyword">SELECT</span> address
+<span class="sql-keyword">FROM</span> patients
+<span class="sql-keyword">WHERE</span> name <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> patient_name
+    <span class="sql-keyword">FROM</span> billing
+    <span class="sql-keyword">WHERE</span> amount > (
+        <span class="sql-keyword">SELECT</span> <span class="sql-function">AVG</span>(amount)
+        <span class="sql-keyword">FROM</span> billing
+        <span class="sql-keyword">WHERE</span> payment_status = <span class="sql-string">'Failed'</span>
+          <span class="sql-keyword">AND</span> amount > <span class="sql-number">2500</span>
+      )
+  )
+  <span class="sql-keyword">AND</span> date_of_birth > <span class="sql-string">'1980-01-01'</span>
+  <span class="sql-keyword">AND</span> gender = <span class="sql-string">'M'</span>
+  <span class="sql-keyword">AND</span> insurance_provider = <span class="sql-string">'MedCare Plus'</span></pre></div>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -927,8 +963,8 @@
             </div>
           </div>
 
-          <!-- Example 15 -->
-          <div class="item">
+          <!-- Example 8 -->
+          <div class="sparta-slide" data-domain="nba" data-height="2" data-breadth="1">
             <div class="example-card">
               <div class="example-label">
                 Natural Language Question
@@ -940,7 +976,20 @@
             </div>
             <div class="example-card">
               <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_game_stats <span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_information <span class="sql-keyword">WHERE</span> height > (<span class="sql-keyword">SELECT</span> <span class="sql-function">AVG</span>(height) <span class="sql-keyword">FROM</span> nba_player_information <span class="sql-keyword">WHERE</span> position = <span class="sql-string">'Point Guard'</span> <span class="sql-keyword">AND</span> draft_year > <span class="sql-number">1990</span>) <span class="sql-keyword">AND</span> position = <span class="sql-string">'Center'</span>) <span class="sql-keyword">AND</span> number_of_rebound > <span class="sql-number">8</span></div>
+              <div class="sql-code"><pre><span class="sql-keyword">SELECT</span> player_name
+<span class="sql-keyword">FROM</span> nba_player_game_stats
+<span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> player_name
+    <span class="sql-keyword">FROM</span> nba_player_information
+    <span class="sql-keyword">WHERE</span> height > (
+        <span class="sql-keyword">SELECT</span> <span class="sql-function">AVG</span>(height)
+        <span class="sql-keyword">FROM</span> nba_player_information
+        <span class="sql-keyword">WHERE</span> position = <span class="sql-string">'Point Guard'</span>
+          <span class="sql-keyword">AND</span> draft_year > <span class="sql-number">1990</span>
+      )
+      <span class="sql-keyword">AND</span> position = <span class="sql-string">'Center'</span>
+  )
+  <span class="sql-keyword">AND</span> number_of_rebound > <span class="sql-number">8</span></pre></div>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -948,8 +997,8 @@
             </div>
           </div>
 
-          <!-- Example 16 -->
-          <div class="item">
+          <!-- Example 9 -->
+          <div class="sparta-slide" data-domain="medical" data-height="2" data-breadth="1">
             <div class="example-card">
               <div class="example-label">
                 Natural Language Question
@@ -961,7 +1010,20 @@
             </div>
             <div class="example-card">
               <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> name <span class="sql-keyword">FROM</span> patients <span class="sql-keyword">WHERE</span> name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> patient_name <span class="sql-keyword">FROM</span> billing <span class="sql-keyword">WHERE</span> amount > (<span class="sql-keyword">SELECT</span> <span class="sql-function">AVG</span>(amount) <span class="sql-keyword">FROM</span> billing <span class="sql-keyword">WHERE</span> payment_status = <span class="sql-string">'Failed'</span> <span class="sql-keyword">AND</span> amount > <span class="sql-number">2500</span>)) <span class="sql-keyword">AND</span> gender = <span class="sql-string">'F'</span> <span class="sql-keyword">AND</span> registration_date > <span class="sql-string">'2021-09-02'</span></div>
+              <div class="sql-code"><pre><span class="sql-keyword">SELECT</span> name
+<span class="sql-keyword">FROM</span> patients
+<span class="sql-keyword">WHERE</span> name <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> patient_name
+    <span class="sql-keyword">FROM</span> billing
+    <span class="sql-keyword">WHERE</span> amount > (
+        <span class="sql-keyword">SELECT</span> <span class="sql-function">AVG</span>(amount)
+        <span class="sql-keyword">FROM</span> billing
+        <span class="sql-keyword">WHERE</span> payment_status = <span class="sql-string">'Failed'</span>
+          <span class="sql-keyword">AND</span> amount > <span class="sql-number">2500</span>
+      )
+  )
+  <span class="sql-keyword">AND</span> gender = <span class="sql-string">'F'</span>
+  <span class="sql-keyword">AND</span> registration_date > <span class="sql-string">'2021-09-02'</span></pre></div>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -969,8 +1031,8 @@
             </div>
           </div>
 
-          <!-- Example 17 -->
-          <div class="item">
+          <!-- Example 10 -->
+          <div class="sparta-slide" data-domain="movie" data-height="1" data-breadth="2">
             <div class="example-card">
               <div class="example-label">
                 Natural Language Question
@@ -982,7 +1044,21 @@
             </div>
             <div class="example-card">
               <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> <span class="sql-function">COUNT</span>(title) <span class="sql-keyword">AS</span> number_of_movies <span class="sql-keyword">FROM</span> movie <span class="sql-keyword">WHERE</span> title <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> movie_title <span class="sql-keyword">FROM</span> role_mapping <span class="sql-keyword">WHERE</span> category = <span class="sql-string">'actor'</span> <span class="sql-keyword">AND</span> name = <span class="sql-string">'John Abraham'</span> <span class="sql-keyword">GROUP BY</span> movie_title) <span class="sql-keyword">AND</span> title <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> movie_title <span class="sql-keyword">FROM</span> ratings <span class="sql-keyword">WHERE</span> median_rating > <span class="sql-number">5</span> <span class="sql-keyword">AND</span> avg_rating > <span class="sql-number">4</span>)</div>
+              <div class="sql-code"><pre><span class="sql-keyword">SELECT</span> <span class="sql-function">COUNT</span>(title) <span class="sql-keyword">AS</span> number_of_movies
+<span class="sql-keyword">FROM</span> movie
+<span class="sql-keyword">WHERE</span> title <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> movie_title
+    <span class="sql-keyword">FROM</span> role_mapping
+    <span class="sql-keyword">WHERE</span> category = <span class="sql-string">'actor'</span>
+      <span class="sql-keyword">AND</span> name = <span class="sql-string">'John Abraham'</span>
+    <span class="sql-keyword">GROUP BY</span> movie_title
+  )
+  <span class="sql-keyword">AND</span> title <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> movie_title
+    <span class="sql-keyword">FROM</span> ratings
+    <span class="sql-keyword">WHERE</span> median_rating > <span class="sql-number">5</span>
+      <span class="sql-keyword">AND</span> avg_rating > <span class="sql-number">4</span>
+  )</pre></div>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -990,8 +1066,8 @@
             </div>
           </div>
 
-          <!-- Example 18 -->
-          <div class="item">
+          <!-- Example 11 -->
+          <div class="sparta-slide" data-domain="nba" data-height="2" data-breadth="1">
             <div class="example-card">
               <div class="example-label">
                 Natural Language Question
@@ -1003,7 +1079,21 @@
             </div>
             <div class="example-card">
               <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> <span class="sql-function">MAX</span>(height) <span class="sql-keyword">FROM</span> nba_player_information <span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_affiliation <span class="sql-keyword">WHERE</span> salary > (<span class="sql-keyword">SELECT</span> <span class="sql-function">MAX</span>(salary) <span class="sql-keyword">FROM</span> nba_player_affiliation <span class="sql-keyword">WHERE</span> team_name = <span class="sql-string">'Suns'</span>) <span class="sql-keyword">AND</span> salary > <span class="sql-number">20000000</span> <span class="sql-keyword">AND</span> team_name = <span class="sql-string">'Lakers'</span>) <span class="sql-keyword">AND</span> position = <span class="sql-string">'Center'</span> <span class="sql-keyword">AND</span> draft_year > <span class="sql-number">1995</span></div>
+              <div class="sql-code"><pre><span class="sql-keyword">SELECT</span> <span class="sql-function">MAX</span>(height)
+<span class="sql-keyword">FROM</span> nba_player_information
+<span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> player_name
+    <span class="sql-keyword">FROM</span> nba_player_affiliation
+    <span class="sql-keyword">WHERE</span> salary > (
+        <span class="sql-keyword">SELECT</span> <span class="sql-function">MAX</span>(salary)
+        <span class="sql-keyword">FROM</span> nba_player_affiliation
+        <span class="sql-keyword">WHERE</span> team_name = <span class="sql-string">'Suns'</span>
+      )
+      <span class="sql-keyword">AND</span> salary > <span class="sql-number">20000000</span>
+      <span class="sql-keyword">AND</span> team_name = <span class="sql-string">'Lakers'</span>
+  )
+  <span class="sql-keyword">AND</span> position = <span class="sql-string">'Center'</span>
+  <span class="sql-keyword">AND</span> draft_year > <span class="sql-number">1995</span></pre></div>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -1011,8 +1101,8 @@
             </div>
           </div>
 
-          <!-- Example 19 -->
-          <div class="item">
+          <!-- Example 12 -->
+          <div class="sparta-slide" data-domain="nba" data-height="1" data-breadth="3">
             <div class="example-card">
               <div class="example-label">
                 Natural Language Question
@@ -1024,7 +1114,26 @@
             </div>
             <div class="example-card">
               <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> team_name <span class="sql-keyword">FROM</span> nba_team_game_stats <span class="sql-keyword">WHERE</span> team_points > (<span class="sql-keyword">SELECT</span> <span class="sql-function">MAX</span>(team_points) <span class="sql-keyword">FROM</span> nba_team_game_stats <span class="sql-keyword">WHERE</span> team_name = <span class="sql-string">'Thunder'</span> <span class="sql-keyword">AND</span> team_points_in_quarter1 > <span class="sql-number">25</span>) <span class="sql-keyword">AND</span> team_points > (<span class="sql-keyword">SELECT</span> <span class="sql-function">MAX</span>(team_points) <span class="sql-keyword">FROM</span> nba_team_game_stats <span class="sql-keyword">WHERE</span> team_points > <span class="sql-number">100</span> <span class="sql-keyword">AND</span> team_percentage_of_three_point_field_goal_made > <span class="sql-number">30</span>) <span class="sql-keyword">AND</span> team_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> team_name <span class="sql-keyword">FROM</span> nba_team_information <span class="sql-keyword">WHERE</span> arena_capacity > <span class="sql-number">20000</span> <span class="sql-keyword">AND</span> team_name <> <span class="sql-string">'Pistons'</span>)</div>
+              <div class="sql-code"><pre><span class="sql-keyword">SELECT</span> team_name
+<span class="sql-keyword">FROM</span> nba_team_game_stats
+<span class="sql-keyword">WHERE</span> team_points > (
+    <span class="sql-keyword">SELECT</span> <span class="sql-function">MAX</span>(team_points)
+    <span class="sql-keyword">FROM</span> nba_team_game_stats
+    <span class="sql-keyword">WHERE</span> team_name = <span class="sql-string">'Thunder'</span>
+      <span class="sql-keyword">AND</span> team_points_in_quarter1 > <span class="sql-number">25</span>
+  )
+  <span class="sql-keyword">AND</span> team_points > (
+    <span class="sql-keyword">SELECT</span> <span class="sql-function">MAX</span>(team_points)
+    <span class="sql-keyword">FROM</span> nba_team_game_stats
+    <span class="sql-keyword">WHERE</span> team_points > <span class="sql-number">100</span>
+      <span class="sql-keyword">AND</span> team_percentage_of_three_point_field_goal_made > <span class="sql-number">30</span>
+  )
+  <span class="sql-keyword">AND</span> team_name <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> team_name
+    <span class="sql-keyword">FROM</span> nba_team_information
+    <span class="sql-keyword">WHERE</span> arena_capacity > <span class="sql-number">20000</span>
+      <span class="sql-keyword">AND</span> team_name &lt;&gt; <span class="sql-string">'Pistons'</span>
+  )</pre></div>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -1032,8 +1141,8 @@
             </div>
           </div>
 
-          <!-- Example 20 -->
-          <div class="item">
+          <!-- Example 13 -->
+          <div class="sparta-slide" data-domain="movie" data-height="1" data-breadth="3">
             <div class="example-card">
               <div class="example-label">
                 Natural Language Question
@@ -1045,7 +1154,27 @@
             </div>
             <div class="example-card">
               <div class="example-label">Generated SQL Query</div>
-              <div class="sql-code"><span class="sql-keyword">SELECT</span> title <span class="sql-keyword">FROM</span> movie <span class="sql-keyword">WHERE</span> title <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> T2.movie_title <span class="sql-keyword">FROM</span> director_mapping <span class="sql-keyword">AS</span> T2 <span class="sql-keyword">WHERE</span> T2.name = <span class="sql-string">'Vivek Athreya'</span> <span class="sql-keyword">AND</span> movie.title = T2.movie_title) <span class="sql-keyword">AND NOT</span> title <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> movie_title <span class="sql-keyword">FROM</span> role_mapping <span class="sql-keyword">WHERE</span> category = <span class="sql-string">'actor'</span> <span class="sql-keyword">AND</span> name = <span class="sql-string">'Matt Smith'</span>) <span class="sql-keyword">AND</span> title <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> movie_title <span class="sql-keyword">FROM</span> ratings <span class="sql-keyword">WHERE</span> median_rating > <span class="sql-number">5</span> <span class="sql-keyword">AND</span> total_votes > <span class="sql-number">100</span> <span class="sql-keyword">GROUP BY</span> movie_title)</div>
+              <div class="sql-code"><pre><span class="sql-keyword">SELECT</span> title
+<span class="sql-keyword">FROM</span> movie
+<span class="sql-keyword">WHERE</span> title <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> T2.movie_title
+    <span class="sql-keyword">FROM</span> director_mapping <span class="sql-keyword">AS</span> T2
+    <span class="sql-keyword">WHERE</span> T2.name = <span class="sql-string">'Vivek Athreya'</span>
+      <span class="sql-keyword">AND</span> movie.title = T2.movie_title
+  )
+  <span class="sql-keyword">AND NOT</span> title <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> movie_title
+    <span class="sql-keyword">FROM</span> role_mapping
+    <span class="sql-keyword">WHERE</span> category = <span class="sql-string">'actor'</span>
+      <span class="sql-keyword">AND</span> name = <span class="sql-string">'Matt Smith'</span>
+  )
+  <span class="sql-keyword">AND</span> title <span class="sql-keyword">IN</span> (
+    <span class="sql-keyword">SELECT</span> movie_title
+    <span class="sql-keyword">FROM</span> ratings
+    <span class="sql-keyword">WHERE</span> median_rating > <span class="sql-number">5</span>
+      <span class="sql-keyword">AND</span> total_votes > <span class="sql-number">100</span>
+    <span class="sql-keyword">GROUP BY</span> movie_title
+  )</pre></div>
             </div>
             <div class="example-card">
               <div class="example-label">Answer</div>
@@ -1053,7 +1182,31 @@
             </div>
           </div>
 
-        </div>
+            </div><!-- .sparta-carousel-track -->
+          </div><!-- .sparta-carousel-viewport -->
+
+          <div class="sparta-carousel-nav">
+            <button class="sparta-nav-btn" id="sparta-prev" aria-label="Previous example"><i class="fas fa-chevron-left"></i></button>
+            <span class="sparta-counter"><span id="sparta-current">1</span> / <span id="sparta-total">13</span></span>
+            <button class="sparta-nav-btn" id="sparta-next" aria-label="Next example"><i class="fas fa-chevron-right"></i></button>
+          </div>
+
+          <div class="sparta-progress-bar">
+            <div class="sparta-progress-fill" id="sparta-progress" style="width:7.7%"></div>
+          </div>
+
+          <div class="sparta-complexity" id="sparta-complexity">
+            <span>Complexity</span>
+            <div class="sparta-complexity-dots">
+              <div class="sparta-complexity-dot"></div>
+              <div class="sparta-complexity-dot"></div>
+              <div class="sparta-complexity-dot"></div>
+              <div class="sparta-complexity-dot"></div>
+              <div class="sparta-complexity-dot"></div>
+            </div>
+          </div>
+
+        </div><!-- .sparta-carousel -->
       </div>
     </div>
   </section>
@@ -1104,10 +1257,10 @@
   </section>
 
 
-  <!-- Method Overview -->
+  <!-- Framework Overview -->
   <section class="section hero is-light">
     <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered">Method Overview</h2>
+      <h2 class="title is-3 has-text-centered">Framework Overview</h2>
 
       <div class="figure-container" style="margin-bottom: 2rem;">
         <img src="SPARTA/Figures/sparta_overview.svg" alt="SPARTA Pipeline Overview" loading="lazy"/>
@@ -1226,11 +1379,13 @@
           <span class="copy-text">Copy</span>
         </button>
       </div>
-      <pre id="bibtex-code"><code>@inproceedings{sparta2025,
-  title={SPARTA: Scalable and Principled Benchmark of Tree-Structured Multi-hop QA over Text and Tables},
-  author={Anonymous},
-  booktitle={Under Review},
-  year={2025}
+      <pre id="bibtex-code"><code>@inproceedings{
+park2026sparta,
+title={{SPARTA}: Scalable and Principled Benchmark of Tree-Structured Multi-hop {QA} over Text and Tables},
+author={Sungho Park and Jueun Kim and Wook-Shin Han},
+booktitle={The Fourteenth International Conference on Learning Representations},
+year={2026},
+url={https://openreview.net/forum?id=8KE9qvKhM4}
 }</code></pre>
     </div>
   </section>

@@ -133,7 +133,16 @@ $(document).ready(function() {
 
 	// Initialize all div with carousel class
     var carousels = bulmaCarousel.attach('.carousel', options);
-	
+
+    // Initialize examples carousel (no autoplay - users need time to read SQL)
+    bulmaCarousel.attach('.examples-carousel', {
+        slidesToScroll: 1,
+        slidesToShow: 1,
+        loop: true,
+        infinite: true,
+        autoplay: false,
+    });
+
     bulmaSlider.attach();
     
     // Setup video autoplay for carousel

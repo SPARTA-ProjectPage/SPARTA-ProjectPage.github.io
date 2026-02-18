@@ -53,8 +53,8 @@
   <title>SPARTA | Tree-Structured Multi-hop QA Benchmark</title>
 
   <!-- Favicon and App Icons -->
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+  <link rel="icon" type="image/png" href="static/images/favicon.png">
+  <link rel="apple-touch-icon" href="static/images/favicon.png">
 
   <!-- Critical CSS - Load synchronously -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -445,6 +445,44 @@
     .sql-string { color: #86efac; }
     .sql-number { color: #fbbf24; }
 
+    .domain-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-left: 0.5rem;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .domain-nba { background: #dbeafe; color: #1e40af; }
+    .domain-movie { background: #fce7f3; color: #9d174d; }
+    .domain-medical { background: #d1fae5; color: #065f46; }
+
+    .interactive-demo .carousel .carousel-container .carousel-item {
+      padding: 0 0.5rem;
+    }
+    .interactive-demo .carousel-navigation .carousel-nav-left,
+    .interactive-demo .carousel-navigation .carousel-nav-right {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+    .interactive-demo .carousel-navigation .carousel-nav-left:hover,
+    .interactive-demo .carousel-navigation .carousel-nav-right:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    .interactive-demo .carousel .carousel-indicator .indicator-item .indicator-style {
+      background: rgba(255, 255, 255, 0.3);
+      border: none;
+    }
+    .interactive-demo .carousel .carousel-indicator .indicator-item.is-active .indicator-style {
+      background: white;
+    }
+
     @media screen and (max-width: 768px) {
       .hero-title-sparta {
         font-size: 1.75rem;
@@ -529,28 +567,45 @@
     </div>
   </section>
 
-  <!-- Abstract Section -->
+  <!-- About SPARTA Section -->
   <section class="section hero is-light">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Abstract</h2>
+          <h2 class="title is-3">About SPARTA</h2>
           <div class="content has-text-justified">
             <p>
-              Real-world Table-Text question answering (QA) tasks require models that can reason across long text and source tables, traversing multiple hops and executing complex operations such as aggregation. Yet existing benchmarks are small, manually curated—and therefore error-prone—and contain shallow questions that seldom demand more than two hops or invoke aggregations, grouping, or other advanced analytical operations expressible in natural-language queries.
+              <strong>SPARTA</strong> is a scalable and principled benchmark framework for tree-structured multi-hop question answering (QA) over text and tables. It provides thousands of high-fidelity question-answer pairs derived from real-world relational databases across diverse domains, including NBA statistics, movies, and medical records. Unlike previous benchmarks that rely on small-scale "toy" tables, SPARTA utilizes extensive databases containing thousands of rows and complex schemas, reflecting realistic data environments. This challenge requires models to navigate intricate tree-structured reasoning paths and execute advanced analytical operations—such as aggregations, grouping (GROUP BY/HAVING), and nested SQL queries (Types N, A, J, and JA)—across heterogeneous data modalities. By exposing the limitations of current systems, which experience performance drops of over 30 F1 points, SPARTA sets a rigorous new standard for evaluating deep cross-modal reasoning.
             </p>
-            <p>
-              We present <strong>SPARTA</strong>, an end-to-end construction framework that automatically generates large-scale Table-Text QA benchmarks with lightweight human validation, requiring only <strong>one quarter of the annotation time</strong> of HybridQA. The framework first constructs a reference fact database by enriching each source table with grounding tables whose tuples are atomic facts automatically extracted from the accompanying unstructured passages, then synthesizes nested queries whose number of nested predicates matches the desired hop count.
-            </p>
-            <p>
-              To ensure that every SQL statement is executable and that its verbalization yields a fluent, human-sounding question, we propose two novel techniques: <strong>provenance-based refinement</strong>, which rewrites any syntactically valid query that returns a non-empty result, and <strong>realistic-structure enforcement</strong>, which confines generation to post-order traversals of the query graph.
-            </p>
-            <div class="results-highlight">
-              <p>
-                On SPARTA, <strong>state-of-the-art models that reach over 70 F1 on HybridQA or over 50 F1 on OTT-QA drop by more than 30 F1 points</strong>, exposing fundamental weaknesses in current cross-modal reasoning.
-              </p>
-            </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why SPARTA? Section -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Why SPARTA?</h2>
+      <div class="content has-text-justified" style="max-width: 800px; margin: 0 auto;">
+        <p>
+          In recent years, benchmarks like HybridQA and OTT-QA have pioneered Table-Text QA. However, their reliance on manual curation has led to fundamental limitations: shallow reasoning, high annotation noise, and toy-scale data environments.
+        </p>
+        <p>
+          As LLMs evolve to handle increasingly complex analytical tasks, we present <strong>SPARTA</strong>, a scalable and principled framework designed to advance cross-modal reasoning through automated, high-fidelity benchmark construction.
+        </p>
+        <p>
+          SPARTA redefines the standards of Table-Text QA with three core advancements:
+        </p>
+        <ul>
+          <li><strong>Real-World Scale:</strong> We move beyond tiny web tables (averaging 15 rows) to enterprise-scale environments, featuring relational data with up to thousands of rows across diverse domains.</li>
+          <li><strong>Tree-Structured Multi-Hop Reasoning:</strong> Unlike existing benchmarks limited to linear, shallow chains, SPARTA synthesizes complex queries requiring tree-structured reasoning, including advanced operations like aggregation and grouping.</li>
+          <li><strong>High Fidelity &amp; Reliability:</strong> By replacing error-prone manual labeling (which has up to a 21% error rate) with provenance-based refinement, SPARTA ensures executable, natural-sounding, and noise-free benchmarks at 4x the construction efficiency.</li>
+        </ul>
+        <div class="results-highlight">
+          <p>
+            <strong>The challenge is significant:</strong> even state-of-the-art LLMs experience a performance drop of over 30 F1 points on SPARTA compared to previous benchmarks, highlighting the critical need for more robust and scalable evaluation.
+          </p>
         </div>
       </div>
     </div>
@@ -561,10 +616,443 @@
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="figure-container">
-          <img src="SPARTA/Figures/An_example_from_SPARTA_benchmark.png" alt="Representative examples of SPARTA benchmark" loading="lazy"/>
+          <img src="SPARTA/Figures/An_example_from_SPARTA_benchmark.svg" alt="Representative examples of SPARTA benchmark" loading="lazy"/>
           <p class="figure-caption">
             <strong>Figure 1:</strong> Representative examples from the SPARTA benchmark showing multi-hop reasoning across tables and text with varying query structures.
           </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Examples Carousel -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="interactive-demo">
+        <h3 class="demo-title"><i class="fas fa-lightbulb"></i>&nbsp; Examples from SPARTA Benchmark</h3>
+
+        <div class="examples-carousel" data-autoplay="false">
+
+          <!-- Example 1 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-nba">NBA</span>
+                <span class="hop-badge">Height: 0</span>
+                <span class="hop-badge">Breadth: 0</span>
+              </div>
+              <div class="example-text">"Which player won the NBA MVP award in the 1986 season?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_award <span class="sql-keyword">WHERE</span> season = <span class="sql-number">1986</span> <span class="sql-keyword">AND</span> award = <span class="sql-string">'nba mvp'</span></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Larry Bird</div>
+            </div>
+          </div>
+
+          <!-- Example 2 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-nba">NBA</span>
+                <span class="hop-badge">Height: 0</span>
+                <span class="hop-badge">Breadth: 0</span>
+              </div>
+              <div class="example-text">"What are the names of the players who scored more than 15 points and rebounded more than 5 times in a game?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_game_stats <span class="sql-keyword">WHERE</span> number_of_points > <span class="sql-number">15</span> <span class="sql-keyword">AND</span> number_of_rebound > <span class="sql-number">5</span></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Langston Galloway, Quincy Acy, Larry Nance Jr., ...</div>
+            </div>
+          </div>
+
+          <!-- Example 3 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-movie">Movie</span>
+                <span class="hop-badge">Height: 0</span>
+                <span class="hop-badge">Breadth: 0</span>
+              </div>
+              <div class="example-text">"In which movies did Riteish Deshmukh act?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> movie_title <span class="sql-keyword">FROM</span> role_mapping <span class="sql-keyword">WHERE</span> category = <span class="sql-string">'actor'</span> <span class="sql-keyword">AND</span> name = <span class="sql-string">'Riteish Deshmukh'</span></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Marjaavaan, Mauli</div>
+            </div>
+          </div>
+
+          <!-- Example 4 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-movie">Movie</span>
+                <span class="hop-badge">Height: 0</span>
+                <span class="hop-badge">Breadth: 0</span>
+              </div>
+              <div class="example-text">"What is the total number of movies with a median rating greater than 5 and an average rating greater than 5.5?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> <span class="sql-function">COUNT</span>(movie_title) <span class="sql-keyword">AS</span> total_movies <span class="sql-keyword">FROM</span> ratings <span class="sql-keyword">WHERE</span> median_rating > <span class="sql-number">5</span> <span class="sql-keyword">AND</span> avg_rating > <span class="sql-number">5.5</span></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">4877</div>
+            </div>
+          </div>
+
+          <!-- Example 5 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-nba">NBA</span>
+                <span class="hop-badge">Height: 0</span>
+                <span class="hop-badge">Breadth: 0</span>
+              </div>
+              <div class="example-text">"Which Western Conference teams faced the Celtics more than once in the Finals?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> western_champion_name <span class="sql-keyword">FROM</span> nba_champion_history <span class="sql-keyword">WHERE</span> nba_champion_name = <span class="sql-string">'Celtics'</span> <span class="sql-keyword">GROUP BY</span> western_champion_name <span class="sql-keyword">HAVING</span> <span class="sql-function">COUNT</span>(western_champion_name) > <span class="sql-number">1</span></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Rockets, Lakers</div>
+            </div>
+          </div>
+
+          <!-- Example 6 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-medical">Medical</span>
+                <span class="hop-badge">Height: 0</span>
+                <span class="hop-badge">Breadth: 0</span>
+              </div>
+              <div class="example-text">"What is the maximum years of experience of a pediatrician at Central Hospital?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> <span class="sql-function">MAX</span>(years_experience) <span class="sql-keyword">FROM</span> doctors <span class="sql-keyword">WHERE</span> hospital_branch = <span class="sql-string">'Central Hospital'</span> <span class="sql-keyword">AND</span> specialization = <span class="sql-string">'Pediatrics'</span></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">28</div>
+            </div>
+          </div>
+
+          <!-- Example 7 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-nba">NBA</span>
+                <span class="hop-badge">Height: 0</span>
+                <span class="hop-badge">Breadth: 0</span>
+              </div>
+              <div class="example-text">"What is the highest salary of Kevin McHale while playing for the Celtics?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> <span class="sql-function">MAX</span>(salary) <span class="sql-keyword">FROM</span> nba_player_affiliation <span class="sql-keyword">WHERE</span> player_name = <span class="sql-string">'Kevin McHale'</span> <span class="sql-keyword">AND</span> team_name = <span class="sql-string">'Celtics'</span></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">3,500,000</div>
+            </div>
+          </div>
+
+          <!-- Example 8 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-nba">NBA</span>
+                <span class="hop-badge">Height: 1</span>
+                <span class="hop-badge">Breadth: 1</span>
+              </div>
+              <div class="example-text">"Which Point Guards, drafted between 2000 and 2005, had more than 4 three-pointers, more than 8 field goals and more than 1 steal in a game?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_game_stats <span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_information <span class="sql-keyword">WHERE</span> position = <span class="sql-string">'Point Guard'</span> <span class="sql-keyword">AND</span> draft_year <span class="sql-keyword">BETWEEN</span> <span class="sql-number">2000</span> <span class="sql-keyword">AND</span> <span class="sql-number">2005</span>) <span class="sql-keyword">AND</span> number_of_three_point_field_goals_made > <span class="sql-number">4</span> <span class="sql-keyword">AND</span> number_of_field_goals_made > <span class="sql-number">8</span> <span class="sql-keyword">AND</span> number_of_steal > <span class="sql-number">1</span></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Chris Paul</div>
+            </div>
+          </div>
+
+          <!-- Example 9 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-nba">NBA</span>
+                <span class="hop-badge">Height: 1</span>
+                <span class="hop-badge">Breadth: 1</span>
+              </div>
+              <div class="example-text">"Which NBA players who were drafted in the first round and play the center position have a salary of over 1 million in the 2016-17 season?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_information <span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_affiliation <span class="sql-keyword">WHERE</span> salary > <span class="sql-number">1000000</span> <span class="sql-keyword">AND</span> season = <span class="sql-string">'2016-17'</span>) <span class="sql-keyword">AND</span> draft_round = <span class="sql-string">'1st round'</span> <span class="sql-keyword">AND</span> position = <span class="sql-string">'Center'</span></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Alex Len, Al Horford, Andre Drummond, ...</div>
+            </div>
+          </div>
+
+          <!-- Example 10 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-medical">Medical</span>
+                <span class="hop-badge">Height: 1</span>
+                <span class="hop-badge">Breadth: 1</span>
+              </div>
+              <div class="example-text">"What are the names of patients who have an appointment with a doctor who works at the central hospital and has more than 20 years of experience?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> patient_name <span class="sql-keyword">FROM</span> appointments <span class="sql-keyword">WHERE</span> doctor_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> name <span class="sql-keyword">FROM</span> doctors <span class="sql-keyword">WHERE</span> hospital_branch = <span class="sql-string">'Central Hospital'</span> <span class="sql-keyword">AND</span> years_experience > <span class="sql-number">20</span>)</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Alex Smith, Alex Aiden Moore, Emily Miller, ...</div>
+            </div>
+          </div>
+
+          <!-- Example 11 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-nba">NBA</span>
+                <span class="hop-badge">Height: 1</span>
+                <span class="hop-badge">Breadth: 2</span>
+              </div>
+              <div class="example-text">"What are the years of birth of the players who have a lane agility time of more than 11.5 seconds, a three quarter sprint of less than 3.35 seconds, more than 10 field goals made and more than 8 rebounds in a game?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> birthyear <span class="sql-keyword">FROM</span> nba_player_information <span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_draft_combine_stats <span class="sql-keyword">WHERE</span> lane_agility_time > <span class="sql-number">11.5</span> <span class="sql-keyword">AND</span> three_quarter_sprint < <span class="sql-number">3.35</span>) <span class="sql-keyword">AND</span> player_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_game_stats <span class="sql-keyword">WHERE</span> number_of_field_goals_made > <span class="sql-number">10</span> <span class="sql-keyword">AND</span> number_of_rebound > <span class="sql-number">8</span>) <span class="sql-keyword">GROUP BY</span> birthyear</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">1984, 1985, 1989, ...</div>
+            </div>
+          </div>
+
+          <!-- Example 12 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-movie">Movie</span>
+                <span class="hop-badge">Height: 1</span>
+                <span class="hop-badge">Breadth: 2</span>
+              </div>
+              <div class="example-text">"Which movies, starring Vincent D Onofrio as an actor, have an average rating greater than 5 and a median rating of 6, excluding 'Kolonya Cumhuriyeti'?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> title <span class="sql-keyword">FROM</span> movie <span class="sql-keyword">WHERE</span> title <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> movie_title <span class="sql-keyword">FROM</span> role_mapping <span class="sql-keyword">WHERE</span> category = <span class="sql-string">'actor'</span> <span class="sql-keyword">AND</span> name = <span class="sql-string">'Vincent D Onofrio'</span> <span class="sql-keyword">AND</span> movie_title = title) <span class="sql-keyword">AND</span> title <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> movie_title <span class="sql-keyword">FROM</span> ratings <span class="sql-keyword">WHERE</span> avg_rating > <span class="sql-number">5</span> <span class="sql-keyword">AND</span> median_rating = <span class="sql-number">6</span> <span class="sql-keyword">AND</span> movie_title <> <span class="sql-string">'Kolonya Cumhuriyeti'</span>)</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">CHIPS, In Dubious Battle</div>
+            </div>
+          </div>
+
+          <!-- Example 13 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-nba">NBA</span>
+                <span class="hop-badge">Height: 1</span>
+                <span class="hop-badge">Breadth: 2</span>
+              </div>
+              <div class="example-text">"Who are the top 5 centers drafted in the 1st round, who have won the dpoy award after 2000, and who have earned more than 2 million dollars in the 2004-05 season, sorted by their draft year in descending order and birth year in ascending order?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_information <span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_affiliation <span class="sql-keyword">WHERE</span> salary > <span class="sql-number">2000000</span> <span class="sql-keyword">AND</span> season = <span class="sql-string">'2004-05'</span>) <span class="sql-keyword">AND</span> player_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_award <span class="sql-keyword">WHERE</span> season > <span class="sql-number">2000</span> <span class="sql-keyword">AND</span> award = <span class="sql-string">'dpoy'</span>) <span class="sql-keyword">AND</span> position = <span class="sql-string">'Center'</span> <span class="sql-keyword">AND</span> draft_round = <span class="sql-string">'1st round'</span> <span class="sql-keyword">ORDER BY</span> draft_year <span class="sql-keyword">DESC</span>, birthyear <span class="sql-keyword">ASC</span> <span class="sql-keyword">LIMIT</span> <span class="sql-number">5</span></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Dwight Howard, Ben Wallace, ...</div>
+            </div>
+          </div>
+
+          <!-- Example 14 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-medical">Medical</span>
+                <span class="hop-badge">Height: 2</span>
+                <span class="hop-badge">Breadth: 1</span>
+              </div>
+              <div class="example-text">"Find the addresses of male patients born after January 1, 1980, who have MedCare Plus insurance and have made payments that exceed the average failed payments greater than 2500."</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> address <span class="sql-keyword">FROM</span> patients <span class="sql-keyword">WHERE</span> name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> patient_name <span class="sql-keyword">FROM</span> billing <span class="sql-keyword">WHERE</span> amount > (<span class="sql-keyword">SELECT</span> <span class="sql-function">AVG</span>(amount) <span class="sql-keyword">FROM</span> billing <span class="sql-keyword">WHERE</span> payment_status = <span class="sql-string">'Failed'</span> <span class="sql-keyword">AND</span> amount > <span class="sql-number">2500</span>)) <span class="sql-keyword">AND</span> date_of_birth > <span class="sql-string">'1980-01-01'</span> <span class="sql-keyword">AND</span> gender = <span class="sql-string">'M'</span> <span class="sql-keyword">AND</span> insurance_provider = <span class="sql-string">'MedCare Plus'</span></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">123 Elm St, 789 Pine Rd, ...</div>
+            </div>
+          </div>
+
+          <!-- Example 15 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-nba">NBA</span>
+                <span class="hop-badge">Height: 2</span>
+                <span class="hop-badge">Breadth: 1</span>
+              </div>
+              <div class="example-text">"Which NBA players, who are centers and taller than the average height of point guards drafted after 1990, have more than 8 rebounds in a game?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_game_stats <span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_information <span class="sql-keyword">WHERE</span> height > (<span class="sql-keyword">SELECT</span> <span class="sql-function">AVG</span>(height) <span class="sql-keyword">FROM</span> nba_player_information <span class="sql-keyword">WHERE</span> position = <span class="sql-string">'Point Guard'</span> <span class="sql-keyword">AND</span> draft_year > <span class="sql-number">1990</span>) <span class="sql-keyword">AND</span> position = <span class="sql-string">'Center'</span>) <span class="sql-keyword">AND</span> number_of_rebound > <span class="sql-number">8</span></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Alex Len, Al Horford, Andre Drummond, ...</div>
+            </div>
+          </div>
+
+          <!-- Example 16 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-medical">Medical</span>
+                <span class="hop-badge">Height: 2</span>
+                <span class="hop-badge">Breadth: 1</span>
+              </div>
+              <div class="example-text">"What are the names of female patients who registered after 2021-09-02 and have billed amounts greater than the average amount of failed payments over 2500?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> name <span class="sql-keyword">FROM</span> patients <span class="sql-keyword">WHERE</span> name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> patient_name <span class="sql-keyword">FROM</span> billing <span class="sql-keyword">WHERE</span> amount > (<span class="sql-keyword">SELECT</span> <span class="sql-function">AVG</span>(amount) <span class="sql-keyword">FROM</span> billing <span class="sql-keyword">WHERE</span> payment_status = <span class="sql-string">'Failed'</span> <span class="sql-keyword">AND</span> amount > <span class="sql-number">2500</span>)) <span class="sql-keyword">AND</span> gender = <span class="sql-string">'F'</span> <span class="sql-keyword">AND</span> registration_date > <span class="sql-string">'2021-09-02'</span></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Emily Jones, Laura Aiden Davis, ...</div>
+            </div>
+          </div>
+
+          <!-- Example 17 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-movie">Movie</span>
+                <span class="hop-badge">Height: 1</span>
+                <span class="hop-badge">Breadth: 2</span>
+              </div>
+              <div class="example-text">"How many movies starring John Abraham have a median rating above 5 and average rating above 4?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> <span class="sql-function">COUNT</span>(title) <span class="sql-keyword">AS</span> number_of_movies <span class="sql-keyword">FROM</span> movie <span class="sql-keyword">WHERE</span> title <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> movie_title <span class="sql-keyword">FROM</span> role_mapping <span class="sql-keyword">WHERE</span> category = <span class="sql-string">'actor'</span> <span class="sql-keyword">AND</span> name = <span class="sql-string">'John Abraham'</span> <span class="sql-keyword">GROUP BY</span> movie_title) <span class="sql-keyword">AND</span> title <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> movie_title <span class="sql-keyword">FROM</span> ratings <span class="sql-keyword">WHERE</span> median_rating > <span class="sql-number">5</span> <span class="sql-keyword">AND</span> avg_rating > <span class="sql-number">4</span>)</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">1</div>
+            </div>
+          </div>
+
+          <!-- Example 18 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-nba">NBA</span>
+                <span class="hop-badge">Height: 2</span>
+                <span class="hop-badge">Breadth: 1</span>
+              </div>
+              <div class="example-text">"What is the maximum height of the Lakers players who play as center, were drafted after 1995 and have a salary greater than the highest salary of the Suns and greater than 20,000,000?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> <span class="sql-function">MAX</span>(height) <span class="sql-keyword">FROM</span> nba_player_information <span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> nba_player_affiliation <span class="sql-keyword">WHERE</span> salary > (<span class="sql-keyword">SELECT</span> <span class="sql-function">MAX</span>(salary) <span class="sql-keyword">FROM</span> nba_player_affiliation <span class="sql-keyword">WHERE</span> team_name = <span class="sql-string">'Suns'</span>) <span class="sql-keyword">AND</span> salary > <span class="sql-number">20000000</span> <span class="sql-keyword">AND</span> team_name = <span class="sql-string">'Lakers'</span>) <span class="sql-keyword">AND</span> position = <span class="sql-string">'Center'</span> <span class="sql-keyword">AND</span> draft_year > <span class="sql-number">1995</span></div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">84</div>
+            </div>
+          </div>
+
+          <!-- Example 19 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-nba">NBA</span>
+                <span class="hop-badge">Height: 1</span>
+                <span class="hop-badge">Breadth: 3</span>
+              </div>
+              <div class="example-text">"What are the names of the teams that scored more than the highest points scored by the Thunder when they scored more than 25 points in the first quarter and scored more than the highest points scored by teams that scored more than 100 points and had a three point field goal percentage of more than 30 and have an arena capacity of more than 20,000 and are not the Pistons?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> team_name <span class="sql-keyword">FROM</span> nba_team_game_stats <span class="sql-keyword">WHERE</span> team_points > (<span class="sql-keyword">SELECT</span> <span class="sql-function">MAX</span>(team_points) <span class="sql-keyword">FROM</span> nba_team_game_stats <span class="sql-keyword">WHERE</span> team_name = <span class="sql-string">'Thunder'</span> <span class="sql-keyword">AND</span> team_points_in_quarter1 > <span class="sql-number">25</span>) <span class="sql-keyword">AND</span> team_points > (<span class="sql-keyword">SELECT</span> <span class="sql-function">MAX</span>(team_points) <span class="sql-keyword">FROM</span> nba_team_game_stats <span class="sql-keyword">WHERE</span> team_points > <span class="sql-number">100</span> <span class="sql-keyword">AND</span> team_percentage_of_three_point_field_goal_made > <span class="sql-number">30</span>) <span class="sql-keyword">AND</span> team_name <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> team_name <span class="sql-keyword">FROM</span> nba_team_information <span class="sql-keyword">WHERE</span> arena_capacity > <span class="sql-number">20000</span> <span class="sql-keyword">AND</span> team_name <> <span class="sql-string">'Pistons'</span>)</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Bulls</div>
+            </div>
+          </div>
+
+          <!-- Example 20 -->
+          <div class="item">
+            <div class="example-card">
+              <div class="example-label">
+                Natural Language Question
+                <span class="domain-badge domain-movie">Movie</span>
+                <span class="hop-badge">Height: 1</span>
+                <span class="hop-badge">Breadth: 3</span>
+              </div>
+              <div class="example-text">"Which movies directed by Vivek Athreya have a median rating greater than 5 with more than 100 total votes, and do not feature Matt Smith as an actor?"</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Generated SQL Query</div>
+              <div class="sql-code"><span class="sql-keyword">SELECT</span> title <span class="sql-keyword">FROM</span> movie <span class="sql-keyword">WHERE</span> title <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> T2.movie_title <span class="sql-keyword">FROM</span> director_mapping <span class="sql-keyword">AS</span> T2 <span class="sql-keyword">WHERE</span> T2.name = <span class="sql-string">'Vivek Athreya'</span> <span class="sql-keyword">AND</span> movie.title = T2.movie_title) <span class="sql-keyword">AND NOT</span> title <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> movie_title <span class="sql-keyword">FROM</span> role_mapping <span class="sql-keyword">WHERE</span> category = <span class="sql-string">'actor'</span> <span class="sql-keyword">AND</span> name = <span class="sql-string">'Matt Smith'</span>) <span class="sql-keyword">AND</span> title <span class="sql-keyword">IN</span> (<span class="sql-keyword">SELECT</span> movie_title <span class="sql-keyword">FROM</span> ratings <span class="sql-keyword">WHERE</span> median_rating > <span class="sql-number">5</span> <span class="sql-keyword">AND</span> total_votes > <span class="sql-number">100</span> <span class="sql-keyword">GROUP BY</span> movie_title)</div>
+            </div>
+            <div class="example-card">
+              <div class="example-label">Answer</div>
+              <div class="example-text" style="font-size:1.5rem; font-weight:700; color:#86efac;">Brochevarevarura, Mental Madhilo</div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -608,103 +1096,13 @@
               <i class="fas fa-check-double"></i>
             </div>
             <h4 class="title is-5">Quality-Assured Generation</h4>
-            <p>Achieves 0% annotation error rate with lightweight human validation, compared to 21-30% error rates in existing benchmarks.</p>
+            <p>Achieves 0% annotation error rate over 100 sampled queries with lightweight human validation, compared to 21-30% error rates in existing benchmarks.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Benchmark Comparison Table -->
-  <section class="section">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered">Benchmark Comparison</h2>
-      <p class="has-text-centered" style="color: #64748b; margin-bottom: 2rem;">
-        SPARTA addresses critical limitations of existing Table-Text QA benchmarks
-      </p>
-
-      <div style="overflow-x: auto;">
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th>Benchmark</th>
-              <th>Avg. Rows</th>
-              <th>Question Gen.</th>
-              <th>Grouping/Having</th>
-              <th>Deep Multi-hop (>3)</th>
-              <th>Error Rate</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>TAT-QA</strong></td>
-              <td>9.4</td>
-              <td>Manual</td>
-              <td><i class="fas fa-times cross-icon"></i></td>
-              <td><i class="fas fa-times cross-icon"></i></td>
-              <td>30%</td>
-            </tr>
-            <tr>
-              <td><strong>FinQA</strong></td>
-              <td>6.4</td>
-              <td>Manual</td>
-              <td><i class="fas fa-times cross-icon"></i></td>
-              <td><i class="fas fa-times cross-icon"></i></td>
-              <td>27%</td>
-            </tr>
-            <tr>
-              <td><strong>MultiHierTT</strong></td>
-              <td>10.8</td>
-              <td>Manual</td>
-              <td><i class="fas fa-times cross-icon"></i></td>
-              <td><i class="fas fa-times cross-icon"></i></td>
-              <td>26%</td>
-            </tr>
-            <tr>
-              <td><strong>HybridQA</strong></td>
-              <td>15.7</td>
-              <td>Manual</td>
-              <td><i class="fas fa-times cross-icon"></i></td>
-              <td><i class="fas fa-times cross-icon"></i></td>
-              <td>21%</td>
-            </tr>
-            <tr>
-              <td><strong>OTT-QA</strong></td>
-              <td>15.7</td>
-              <td>Manual</td>
-              <td><i class="fas fa-times cross-icon"></i></td>
-              <td><i class="fas fa-times cross-icon"></i></td>
-              <td>21%</td>
-            </tr>
-            <tr class="sparta-row">
-              <td><strong>SPARTA (NBA)</strong></td>
-              <td>3,280</td>
-              <td>Auto (LLM)</td>
-              <td><i class="fas fa-check check-icon"></i></td>
-              <td><i class="fas fa-check check-icon"></i></td>
-              <td><strong>0%</strong></td>
-            </tr>
-            <tr class="sparta-row">
-              <td><strong>SPARTA (Movie)</strong></td>
-              <td>10,054</td>
-              <td>Auto (LLM)</td>
-              <td><i class="fas fa-check check-icon"></i></td>
-              <td><i class="fas fa-check check-icon"></i></td>
-              <td><strong>0%</strong></td>
-            </tr>
-            <tr class="sparta-row">
-              <td><strong>SPARTA (Medical)</strong></td>
-              <td>200</td>
-              <td>Auto (LLM)</td>
-              <td><i class="fas fa-check check-icon"></i></td>
-              <td><i class="fas fa-check check-icon"></i></td>
-              <td><strong>0%</strong></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
 
   <!-- Method Overview -->
   <section class="section hero is-light">
@@ -712,7 +1110,7 @@
       <h2 class="title is-3 has-text-centered">Method Overview</h2>
 
       <div class="figure-container" style="margin-bottom: 2rem;">
-        <img src="SPARTA/Figures/sparta_overview.png" alt="SPARTA Pipeline Overview" loading="lazy"/>
+        <img src="SPARTA/Figures/sparta_overview.svg" alt="SPARTA Pipeline Overview" loading="lazy"/>
         <p class="figure-caption">
           <strong>Figure 2:</strong> Overview of SPARTA pipeline: (1) Reference Fact Database Construction, (2) Query Generation, (3) Question Verbalisation.
         </p>
@@ -723,7 +1121,7 @@
           <div class="step-number">1</div>
           <div class="step-content">
             <h4>Reference Fact Database Construction</h4>
-            <p>Source and grounding tables are merged into a unified reference fact database. Textual facts are decomposed into atomic propositions stored as tuples, making all facts uniformly queryable via SQL.</p>
+            <p>SPARTA unifies all evidence—structured and unstructured—into a single relational store called the reference fact database. Textual facts are decomposed into atomic propositions and stored as tuples, making them directly addressable via SQL alongside structured data.</p>
           </div>
         </div>
 
@@ -755,7 +1153,7 @@
       </p>
 
       <div class="figure-container">
-        <img src="SPARTA/Figures/provenance_based_refinement_overview.png" alt="Provenance-based refinement process" loading="lazy"/>
+        <img src="SPARTA/Figures/provenance_based_refinement_overview.svg" alt="Provenance-based refinement process" loading="lazy"/>
         <p class="figure-caption">
           <strong>Figure 3:</strong> Provenance-based refinement process. When a query returns empty results, the system traces the failure using "why-not provenance", identifies the blocking predicate, and guides the LLM to relax overly restrictive conditions.
         </p>
@@ -779,7 +1177,7 @@
       <div class="columns">
         <div class="column is-6">
           <div class="figure-container">
-            <img src="SPARTA/Figures/query_shape_separated_horizontal.png" alt="F1 scores across tree configurations" loading="lazy"/>
+            <img src="SPARTA/Figures/query_shape_separated_horizontal.svg" alt="F1 scores across tree configurations" loading="lazy"/>
             <p class="figure-caption">
               <strong>Figure 4:</strong> F1 scores across query tree configurations. Performance degrades as depth and breadth increase.
             </p>
@@ -787,7 +1185,7 @@
         </div>
         <div class="column is-6">
           <div class="figure-container">
-            <img src="SPARTA/Figures/sql_operations_separated_horizontal.png" alt="F1 scores across SQL operations" loading="lazy"/>
+            <img src="SPARTA/Figures/sql_operations_separated_horizontal.svg" alt="F1 scores across SQL operations" loading="lazy"/>
             <p class="figure-caption">
               <strong>Figure 5:</strong> F1 scores across analytical operations. Models struggle with GROUP BY, ORDER BY, and aggregation.
             </p>
@@ -796,7 +1194,7 @@
       </div>
 
       <div class="figure-container" style="margin-top: 2rem;">
-        <img src="SPARTA/Figures/naturalness.png" alt="Query naturalness comparison" loading="lazy"/>
+        <img src="SPARTA/Figures/naturalness.svg" alt="Query naturalness comparison" loading="lazy"/>
         <p class="figure-caption">
           <strong>Figure 6:</strong> Query naturalness evaluation comparing different generation methods. Our execution-guided approach with post-order traversal achieves the highest naturalness scores.
         </p>
@@ -804,53 +1202,13 @@
     </div>
   </section>
 
-  <!-- Interactive Example -->
-  <section class="section">
-    <div class="container is-max-desktop">
-      <div class="interactive-demo">
-        <h3 class="demo-title"><i class="fas fa-lightbulb"></i>&nbsp; Example from SPARTA Benchmark</h3>
-
-        <div class="example-card">
-          <div class="example-label">Natural Language Question <span class="hop-badge">4-Hop</span></div>
-          <div class="example-text">
-            "What is the average salary of players who scored more than 20 points in games where the home team won by more than 10 points against teams from the Eastern Conference?"
-          </div>
-        </div>
-
-        <div class="example-card">
-          <div class="example-label">Generated SQL Query</div>
-          <div class="sql-code">
-            <span class="sql-keyword">SELECT</span> <span class="sql-function">AVG</span>(salary) <span class="sql-keyword">FROM</span> player_salaries<br>
-            <span class="sql-keyword">WHERE</span> player_name <span class="sql-keyword">IN</span> (<br>
-            &nbsp;&nbsp;<span class="sql-keyword">SELECT</span> player_name <span class="sql-keyword">FROM</span> game_stats<br>
-            &nbsp;&nbsp;<span class="sql-keyword">WHERE</span> points > <span class="sql-number">20</span> <span class="sql-keyword">AND</span> game_id <span class="sql-keyword">IN</span> (<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<span class="sql-keyword">SELECT</span> game_id <span class="sql-keyword">FROM</span> games<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<span class="sql-keyword">WHERE</span> home_score - away_score > <span class="sql-number">10</span><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;<span class="sql-keyword">AND</span> away_team <span class="sql-keyword">IN</span> (<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sql-keyword">SELECT</span> team_name <span class="sql-keyword">FROM</span> teams<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sql-keyword">WHERE</span> conference = <span class="sql-string">'Eastern'</span><br>
-            &nbsp;&nbsp;&nbsp;&nbsp;)<br>
-            &nbsp;&nbsp;)<br>
-            )
-          </div>
-        </div>
-
-        <div class="example-card">
-          <div class="example-label">Answer</div>
-          <div class="example-text" style="font-size: 1.5rem; font-weight: 700; color: #86efac;">
-            $8,547,230
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Case Study -->
   <section class="section hero is-light">
     <div class="container is-max-desktop">
       <h2 class="title is-3 has-text-centered">Case Study</h2>
       <div class="figure-container">
-        <img src="SPARTA/Figures/case_study.png" alt="Case study showing model failures" loading="lazy"/>
+        <img src="SPARTA/Figures/case_study.svg" alt="Case study showing model failures" loading="lazy"/>
         <p class="figure-caption">
           <strong>Figure 7:</strong> Case study illustrating typical failure modes of current Table-Text QA models on SPARTA benchmark questions.
         </p>

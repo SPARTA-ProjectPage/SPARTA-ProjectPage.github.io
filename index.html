@@ -727,6 +727,97 @@
     </div>
   </section>
 
+  <!-- Benchmark Comparison Table -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <h2 class="title is-3 has-text-centered">Benchmark Comparison</h2>
+      <p class="has-text-centered" style="color: #64748b; margin-bottom: 2rem;">
+        SPARTA addresses critical limitations of existing Table-Text QA benchmarks
+      </p>
+
+      <div style="overflow-x: auto;">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Benchmark</th>
+              <th>Avg. Rows</th>
+              <th>Question Gen.</th>
+              <th>Grouping/Having</th>
+              <th>Deep Multi-hop (>3)</th>
+              <th>Error Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>TAT-QA</strong></td>
+              <td>9.4</td>
+              <td>Manual</td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td>30%</td>
+            </tr>
+            <tr>
+              <td><strong>FinQA</strong></td>
+              <td>6.4</td>
+              <td>Manual</td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td>27%</td>
+            </tr>
+            <tr>
+              <td><strong>MultiHierTT</strong></td>
+              <td>10.8</td>
+              <td>Manual</td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td>26%</td>
+            </tr>
+            <tr>
+              <td><strong>HybridQA</strong></td>
+              <td>15.7</td>
+              <td>Manual</td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td>21%</td>
+            </tr>
+            <tr>
+              <td><strong>OTT-QA</strong></td>
+              <td>15.7</td>
+              <td>Manual</td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td><i class="fas fa-times cross-icon"></i></td>
+              <td>21%</td>
+            </tr>
+            <tr class="sparta-row">
+              <td><strong>SPARTA (NBA)</strong></td>
+              <td>3,280</td>
+              <td>Auto (LLM)</td>
+              <td><i class="fas fa-check check-icon"></i></td>
+              <td><i class="fas fa-check check-icon"></i></td>
+              <td><strong>0%</strong></td>
+            </tr>
+            <tr class="sparta-row">
+              <td><strong>SPARTA (Movie)</strong></td>
+              <td>10,054</td>
+              <td>Auto (LLM)</td>
+              <td><i class="fas fa-check check-icon"></i></td>
+              <td><i class="fas fa-check check-icon"></i></td>
+              <td><strong>0%</strong></td>
+            </tr>
+            <tr class="sparta-row">
+              <td><strong>SPARTA (Medical)</strong></td>
+              <td>200</td>
+              <td>Auto (LLM)</td>
+              <td><i class="fas fa-check check-icon"></i></td>
+              <td><i class="fas fa-check check-icon"></i></td>
+              <td><strong>0%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
   <!-- Interactive Examples Carousel -->
   <section class="section">
     <div class="container is-max-desktop">

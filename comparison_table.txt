@@ -1,0 +1,49 @@
+\begin{table}
+ \small
+  \centering
+  \renewcommand{\arraystretch}{1.00}
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{
+      l |              
+      c  c|            
+      c |               
+      c |
+      c  c |
+      c  c | 
+      c 
+  }
+    \toprule
+    \multirow{3}{*}{\textbf{Benchmark}} &
+    \multicolumn{2}{c|}{\textbf{Table Size}} &
+    \multirow{3}{*}{\shortstack{\textbf{Question} \\ \textbf{Generation}}} &
+    \multirow{3}{*}{\textbf{Grouping/Having}} &
+    \multicolumn{2}{c|}{\textbf{Query Shape Supported}} &
+    \multicolumn{2}{c|}{\textbf{Multi-hop Reasoning}} &
+    \multirow{3}{*}{\textbf{\begin{iclr}
+    \shortstack{\textbf{Annotation Error Rate} \\ \textbf{(over 100 sampled queries)}}
+    \end{iclr}}} \\
+    \cmidrule(lr){2-3} \cmidrule(lr){6-7} \cmidrule(lr){8-9}
+    & \makecell{\#Col} & \makecell{\#Row} &
+    & 
+    & \makecell{Chain\\($\!>\!3$-Hop)} & Star &
+    Cross-modal & Uni-modal \\
+    \midrule
+    TAT-QA \cite{tatqa}    & 4.0  & 9.4   & Manual & \xmark & \xmark & \xmark & \cmark & \xmark & \begin{iclr}30\%\end{iclr} \\
+    FinQA  \cite{finqa}    & --   & 6.4   & Manual & \xmark & \xmark & \xmark & \cmark & \xmark & \begin{iclr}27\%\end{iclr} \\
+    MULTIHIERITT \cite{multihiertt} & 5.0  & 10.8  & Manual & \xmark & \xmark & \xmark & \cmark & \cmark & \begin{iclr}26\%\end{iclr} \\
+    HybridQA \cite{hybridQA} & 4.4  & 15.7 & Manual & \xmark & \xmark & \xmark & \cmark & \xmark & \begin{iclr}21\%\end{iclr} \\
+    OTT-QA \cite{ottqa}     & 4.4  & 15.7 & Manual & \xmark & \xmark & \xmark & \cmark & \xmark & \begin{iclr}21\%\end{iclr} \\
+    \midrule
+    \textbf{SPARTA (NBA)}     & \textbf{12.2} & \textbf{3,280.5} & 
+      \multirow{3}{*}{\makecell{& \textbf{Auto (LLM)} \\ \textbf{w/ Lightweight Human Validation }}} & 
+      \multirow{3}{*}{\cmark} & \multirow{3}{*}{\cmark} & \multirow{3}{*}{\cmark} & \multirow{3}{*}{\cmark} & \multirow{3}{*}{\cmark} & \multirow{3}{*}{\begin{iclr}0\%\end{iclr}} 
+      \\
+    \textbf{SPARTA (Movie)}   & \textbf{4.7} & \textbf{10,054.0} &  &  &  &  &  &  \\
+    \textbf{SPARTA (Medical)} & \textbf{6.7} & \textbf{200.0} &  &  &  &  &  &  \\
+    \bottomrule
+  \end{tabular}
+  }
+  \caption{Comparison of Table–Text QA benchmarks (see Appendix~\ref{sec:cross_dataset_annotation_audit} for detailed annotation audit results).}
+  \label{tab:comparison_table}
+  \vspace{-5mm}
+\end{table}

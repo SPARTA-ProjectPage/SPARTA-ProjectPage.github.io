@@ -152,6 +152,9 @@ function initSpartaCarousel() {
     var filteredIndices = [];
     var currentPos = 0;
     var currentFilter = 'all';
+    var slideDirection = 'next'; // 'next' or 'prev'
+    var autoplayTimer = null;
+    var AUTOPLAY_MS = 8000;
 
     var prevBtn = document.getElementById('sparta-prev');
     var nextBtn = document.getElementById('sparta-next');
@@ -173,15 +176,17 @@ function initSpartaCarousel() {
     function showSlide(pos) {
         if (!filteredIndices.length) return;
         currentPos = pos;
-        // Hide all
+        // Hide all and clear direction class
         for (var i = 0; i < allSlides.length; i++) {
-            allSlides[i].classList.remove('active');
+            allSlides[i].classList.remove('active', 'slide-rev');
         }
         var idx = filteredIndices[currentPos];
         var slide = allSlides[idx];
-        slide.classList.remove('active');
         // Force reflow for re-animation
         void slide.offsetWidth;
+        if (slideDirection === 'prev') {
+            slide.classList.add('slide-rev');
+        }
         slide.classList.add('active');
 
         // Update counter
@@ -192,10 +197,10 @@ function initSpartaCarousel() {
         var pct = ((currentPos + 1) / filteredIndices.length) * 100;
         progressEl.style.width = pct + '%';
 
-        // Update complexity dots
+        // Update complexity dots (max 4)
         var h = parseInt(slide.getAttribute('data-height')) || 0;
         var b = parseInt(slide.getAttribute('data-breadth')) || 0;
-        var complexity = Math.min(h + b, 5);
+        var complexity = Math.min(h + b, 4);
         var dots = complexityEl.querySelectorAll('.sparta-complexity-dot');
         for (var d = 0; d < dots.length; d++) {
             if (d < complexity) {
@@ -208,17 +213,32 @@ function initSpartaCarousel() {
 
     function next() {
         if (!filteredIndices.length) return;
+        slideDirection = 'next';
         showSlide((currentPos + 1) % filteredIndices.length);
     }
 
     function prev() {
         if (!filteredIndices.length) return;
+        slideDirection = 'prev';
         showSlide((currentPos - 1 + filteredIndices.length) % filteredIndices.length);
     }
 
+    // Autoplay
+    function startAutoplay() {
+        stopAutoplay();
+        autoplayTimer = setInterval(next, AUTOPLAY_MS);
+    }
+    function stopAutoplay() {
+        if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; }
+    }
+    function resetAutoplay() {
+        stopAutoplay();
+        startAutoplay();
+    }
+
     // Nav buttons
-    prevBtn.addEventListener('click', prev);
-    nextBtn.addEventListener('click', next);
+    prevBtn.addEventListener('click', function() { prev(); resetAutoplay(); });
+    nextBtn.addEventListener('click', function() { next(); resetAutoplay(); });
 
     // Filter tabs
     filterTabs.forEach(function(tab) {
@@ -226,14 +246,15 @@ function initSpartaCarousel() {
             filterTabs.forEach(function(t) { t.classList.remove('active'); });
             tab.classList.add('active');
             currentFilter = tab.getAttribute('data-filter');
+            slideDirection = 'next';
             buildFilteredList(currentFilter);
             showSlide(0);
+            resetAutoplay();
         });
     });
 
     // Keyboard navigation
     document.addEventListener('keydown', function(e) {
-        // Only respond when the carousel is somewhat visible
         var carousel = document.querySelector('.sparta-carousel');
         if (!carousel) return;
         var rect = carousel.getBoundingClientRect();
@@ -242,10 +263,10 @@ function initSpartaCarousel() {
 
         if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
             e.preventDefault();
-            next();
+            next(); resetAutoplay();
         } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
             e.preventDefault();
-            prev();
+            prev(); resetAutoplay();
         }
     });
 
@@ -262,11 +283,21 @@ function initSpartaCarousel() {
             var diff = touchStartX - touchEndX;
             if (Math.abs(diff) > 50) {
                 if (diff > 0) { next(); } else { prev(); }
+                resetAutoplay();
             }
         }, { passive: true });
     }
 
+    // Pause autoplay on hover
+    var carouselEl = document.querySelector('.sparta-carousel');
+    if (carouselEl) {
+        carouselEl.addEventListener('mouseenter', stopAutoplay);
+        carouselEl.addEventListener('mouseleave', startAutoplay);
+    }
+
     // Initial setup
+    slideDirection = 'next';
     buildFilteredList('all');
     showSlide(0);
+    startAutoplay();
 }

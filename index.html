@@ -463,18 +463,30 @@
     .sparta-carousel { position: relative; }
     .sparta-carousel-viewport { overflow: hidden; border-radius: 16px; min-height: 200px; }
     .sparta-carousel-track { position: relative; }
-    .sparta-slide { display: none; animation: spartaFadeIn 0.45s ease-out; }
-    .sparta-slide.active { display: block; }
-    @keyframes spartaFadeIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
+    .sparta-slide { display: none; }
+    .sparta-slide.active { display: block; animation: slideFromRight 0.4s ease-out; }
+    .sparta-slide.active.slide-rev { animation: slideFromLeft 0.4s ease-out; }
+    @keyframes slideFromRight {
+      from { opacity: 0; transform: translateX(60px); }
+      to { opacity: 1; transform: translateX(0); }
     }
-    .sparta-slide.active .example-card:nth-child(1) { animation: cardReveal 0.4s ease-out 0.0s both; }
-    .sparta-slide.active .example-card:nth-child(2) { animation: cardReveal 0.4s ease-out 0.12s both; }
-    .sparta-slide.active .example-card:nth-child(3) { animation: cardReveal 0.4s ease-out 0.24s both; }
-    @keyframes cardReveal {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes slideFromLeft {
+      from { opacity: 0; transform: translateX(-60px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .sparta-slide.active .example-card:nth-child(1) { animation: cardSlideIn 0.35s ease-out 0.0s both; }
+    .sparta-slide.active .example-card:nth-child(2) { animation: cardSlideIn 0.35s ease-out 0.1s both; }
+    .sparta-slide.active .example-card:nth-child(3) { animation: cardSlideIn 0.35s ease-out 0.2s both; }
+    @keyframes cardSlideIn {
+      from { opacity: 0; transform: translateX(30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .sparta-slide.active.slide-rev .example-card:nth-child(1) { animation: cardSlideInRev 0.35s ease-out 0.0s both; }
+    .sparta-slide.active.slide-rev .example-card:nth-child(2) { animation: cardSlideInRev 0.35s ease-out 0.1s both; }
+    .sparta-slide.active.slide-rev .example-card:nth-child(3) { animation: cardSlideInRev 0.35s ease-out 0.2s both; }
+    @keyframes cardSlideInRev {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
     }
     .example-card {
       transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
@@ -485,9 +497,11 @@
       border-color: rgba(255, 255, 255, 0.4);
     }
     .sql-code pre {
-      margin: 0; padding: 0; font-family: inherit; font-size: inherit;
-      color: inherit; background: none; white-space: pre;
-      overflow-x: auto; line-height: 1.6;
+      margin: 0 !important; padding: 0 !important;
+      font-family: inherit !important; font-size: inherit !important;
+      color: inherit !important; background: transparent !important;
+      white-space: pre; overflow-x: auto; line-height: 1.6;
+      border: none !important; border-radius: 0 !important;
     }
     .sql-indent { color: rgba(255,255,255,0.15); }
     .sql-code::-webkit-scrollbar { height: 6px; }
@@ -1198,7 +1212,6 @@
           <div class="sparta-complexity" id="sparta-complexity">
             <span>Complexity</span>
             <div class="sparta-complexity-dots">
-              <div class="sparta-complexity-dot"></div>
               <div class="sparta-complexity-dot"></div>
               <div class="sparta-complexity-dot"></div>
               <div class="sparta-complexity-dot"></div>

@@ -702,7 +702,7 @@
           <h2 class="title is-3">About SPARTA</h2>
           <div class="content has-text-justified">
             <p>
-              <strong>SPARTA</strong> is a scalable and principled benchmark framework for tree-structured multi-hop question answering (QA) over text and tables. It provides thousands of high-fidelity question-answer pairs derived from real-world relational databases across diverse domains, including NBA statistics, movies, and medical records. Unlike previous benchmarks that rely on small-scale "toy" tables, SPARTA utilizes extensive databases containing thousands of rows and complex schemas, reflecting realistic data environments. This challenge requires models to navigate intricate tree-structured reasoning paths and execute advanced analytical operations—such as aggregations, grouping (GROUP BY/HAVING), and nested SQL queries (Types N, A, J, and JA)—across heterogeneous data modalities. By exposing the limitations of current systems, which experience performance drops of over 30 F1 points, SPARTA sets a rigorous new standard for evaluating deep cross-modal reasoning.
+              <strong>SPARTA</strong> introduces a groundbreaking benchmark for tree-structured multi-hop question answering (QA) across text and tables, addressing the critical shortcomings of existing datasets like HybridQA and OTT-QA, which suffer from shallow reasoning, annotation errors, and limited scale. By constructing a unified reference fact database that merges source tables with grounding tables derived from unstructured passages, our end-to-end framework automates the generation of thousands of high-fidelity QA pairs—requiring only a quarter of the annotation effort—while incorporating advanced operations like aggregation, grouping, and deep nested predicates. Innovative techniques such as provenance-based refinement and realistic-structure enforcement ensure executable, semantically sound queries that mimic real-world complexity, spanning domains like NBA, movies, and medicine. On SPARTA, state-of-the-art models plummet by over 30 F1 points, exposing gaps in cross-modal reasoning and paving the way for more robust QA systems.
             </p>
           </div>
         </div>
@@ -739,7 +739,7 @@
           SPARTA redefines the standards of Table-Text QA with three core advancements:
         </p>
         <ul>
-          <li><strong>Real-World Scale:</strong> We move beyond tiny web tables (averaging 15 rows) to enterprise-scale environments, featuring relational data with up to thousands of rows across diverse domains.</li>
+          <li><strong>Real-World Scale:</strong> We move beyond tiny web tables (averaging 15 rows) to realistic settings, featuring relational data with up to thousands of rows.</li>
           <li><strong>Tree-Structured Multi-Hop Reasoning:</strong> Unlike existing benchmarks limited to linear, shallow chains, SPARTA synthesizes complex queries requiring tree-structured reasoning, including advanced operations like aggregation and grouping.</li>
           <li><strong>High Fidelity &amp; Reliability:</strong> By replacing error-prone manual labeling (which has up to a 21% error rate) with provenance-based refinement, SPARTA ensures executable, natural-sounding, and noise-free benchmarks at 4x the construction efficiency.</li>
         </ul>
@@ -898,7 +898,7 @@
               <div class="example-label">Required Reasoning</div>
               <ol class="reasoning-steps">
                 <li>Find Point Guards drafted between 2000 and 2005 (Table: nba_player_information)</li>
-                <li>Filter games with &gt;4 three-pointers, &gt;8 field goals, &gt;1 steal (Table: nba_player_game_stats)</li>
+                <li>Filter games with &gt;4 three-pointers, &gt;8 field goals, &gt;1 steal (Text: nba_player_game_stats)</li>
                 <li>Join results via nested subquery to find matching players</li>
               </ol>
             </div>
@@ -971,7 +971,7 @@
             <div class="example-card">
               <div class="example-label">Required Reasoning</div>
               <ol class="reasoning-steps">
-                <li>Find doctors at Central Hospital with &gt;20 years of experience (Table: doctors)</li>
+                <li>Find doctors at Central Hospital with &gt;20 years of experience (Text: doctors)</li>
                 <li>Find patients who have appointments with those doctors (Table: appointments)</li>
               </ol>
             </div>
@@ -1014,7 +1014,7 @@
               <div class="example-label">Required Reasoning</div>
               <ol class="reasoning-steps">
                 <li>Find players with lane agility &gt;11.5s and sprint &lt;3.35s (Table: nba_draft_combine_stats)</li>
-                <li>Find players with &gt;10 field goals and &gt;8 rebounds (Table: nba_player_game_stats)</li>
+                <li>Find players with &gt;10 field goals and &gt;8 rebounds (Text: nba_player_game_stats)</li>
                 <li>Intersect both conditions and retrieve birth years (Breadth-2 join via nba_player_information)</li>
               </ol>
             </div>
@@ -1057,7 +1057,7 @@
             <div class="example-card">
               <div class="example-label">Required Reasoning</div>
               <ol class="reasoning-steps">
-                <li>Find movies where Vincent D Onofrio is an actor (Table: role_mapping)</li>
+                <li>Find movies where Vincent D Onofrio is an actor (Text: role_mapping)</li>
                 <li>Find movies with avg_rating &gt; 5 and median_rating = 6 (Table: ratings)</li>
                 <li>Intersect both conditions and exclude specific movie (Breadth-2 join)</li>
               </ol>
@@ -1148,7 +1148,7 @@
               <ol class="reasoning-steps">
                 <li>Compute average of failed payments exceeding 2500 (Nested aggregation: billing)</li>
                 <li>Find patients with payments above that average (Table: billing)</li>
-                <li>Filter male patients born after 1980 with MedCare Plus (Table: patients)</li>
+                <li>Filter male patients born after 1980 with MedCare Plus (Text: patients)</li>
               </ol>
             </div>
             <div class="example-card">
@@ -1190,7 +1190,7 @@
               <ol class="reasoning-steps">
                 <li>Compute average height of Point Guards drafted after 1990 (Nested aggregation)</li>
                 <li>Find Centers taller than that average (Table: nba_player_information)</li>
-                <li>Filter games with &gt;8 rebounds (Table: nba_player_game_stats)</li>
+                <li>Filter games with &gt;8 rebounds (Text: nba_player_game_stats)</li>
               </ol>
             </div>
             <div class="example-card">
@@ -1232,7 +1232,7 @@
               <ol class="reasoning-steps">
                 <li>Compute average of failed payments exceeding 2500 (Nested aggregation: billing)</li>
                 <li>Find patients with billed amounts above that average (Table: billing)</li>
-                <li>Filter for female patients registered after 2021-09-02 (Table: patients)</li>
+                <li>Filter for female patients registered after 2021-09-02 (Text: patients)</li>
               </ol>
             </div>
             <div class="example-card">
@@ -1273,7 +1273,7 @@
             <div class="example-card">
               <div class="example-label">Required Reasoning</div>
               <ol class="reasoning-steps">
-                <li>Find movies where John Abraham is an actor (Table: role_mapping)</li>
+                <li>Find movies where John Abraham is an actor (Text: role_mapping)</li>
                 <li>Find movies with median_rating &gt; 5 and avg_rating &gt; 4 (Table: ratings)</li>
                 <li>Intersect both conditions and count matching movies (Breadth-2 join)</li>
               </ol>
@@ -1364,8 +1364,8 @@
             <div class="example-card">
               <div class="example-label">Required Reasoning</div>
               <ol class="reasoning-steps">
-                <li>Find max points of Thunder when Q1 &gt; 25 (Subquery 1: nba_team_game_stats)</li>
-                <li>Find max points of teams with &gt;100 pts and &gt;30% 3pt FG (Subquery 2: nba_team_game_stats)</li>
+                <li>Find max points of Thunder when Q1 &gt; 25 (Subquery 1, Text: nba_team_game_stats)</li>
+                <li>Find max points of teams with &gt;100 pts and &gt;30% 3pt FG (Subquery 2, Text: nba_team_game_stats)</li>
                 <li>Find teams with arena capacity &gt;20,000 excluding Pistons (Subquery 3: nba_team_information)</li>
                 <li>Combine all three conditions (Breadth-3 join)</li>
               </ol>
@@ -1414,8 +1414,8 @@
             <div class="example-card">
               <div class="example-label">Required Reasoning</div>
               <ol class="reasoning-steps">
-                <li>Find movies directed by Vivek Athreya (Subquery 1: director_mapping)</li>
-                <li>Exclude movies featuring Matt Smith as actor (Subquery 2: role_mapping)</li>
+                <li>Find movies directed by Vivek Athreya (Subquery 1, Text: director_mapping)</li>
+                <li>Exclude movies featuring Matt Smith as actor (Subquery 2, Text: role_mapping)</li>
                 <li>Find movies with median_rating &gt; 5 and &gt;100 votes (Subquery 3: ratings)</li>
                 <li>Combine all three conditions (Breadth-3 join)</li>
               </ol>
